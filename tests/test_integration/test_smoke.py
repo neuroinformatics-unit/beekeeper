@@ -1,10 +1,10 @@
 from dash.testing.composite import DashComposite
 
-from wazp.app import app
+from beekeeper.app import app
 
 
 def test_start_server_no_errors(dash_duo: DashComposite) -> None:
-    """A minimal smoke test: launching the wazp webapp should startup, and
+    """A minimal smoke test: launching the beekeeper webapp should startup, and
     display the page content without error.
 
     Parameters:

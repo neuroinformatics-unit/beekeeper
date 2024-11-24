@@ -2,7 +2,7 @@ import pytest
 import selenium
 from dash.testing.composite import DashComposite
 
-from wazp.app import app
+from beekeeper.app import app
 
 
 def test_components_created(
@@ -34,7 +34,7 @@ def test_components_created(
 
     # wait for sidebar to be rendered
     try:
-        dash_duo.wait_for_text_to_equal("#sidebar h2", "WAZP 🐝", timeout=timeout)
+        dash_duo.wait_for_text_to_equal("#sidebar h2", "beekeeper 🐝", timeout=timeout)
     except selenium.common.exceptions.TimeoutException:
         pytest.fail("Sidebar component not generated")
 

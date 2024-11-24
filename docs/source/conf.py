@@ -20,7 +20,7 @@ autodoc_mock_imports = []
 # use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath("../.."))
 
-project = "wazp"
+project = "beekeeper"
 copyright = "2022, University College London (UCL)"
 author = "The Sainsbury Wellcome Centre and The Centre for Advanced Research Computing, UCL"
 try:
@@ -91,7 +91,7 @@ linkcheck_anchors_ignore_for_url = [
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 html_theme = "pydata_sphinx_theme"
-html_title = "wazp"
+html_title = "beekeeper"
 
 # Customize the theme
 html_theme_options = {
@@ -100,7 +100,7 @@ html_theme_options = {
             # Label for this link
             "name": "GitHub",
             # URL where the link will redirect
-            "url": "https://github.com/SainsburyWellcomeCentre/WAZP",  # required
+            "url": "https://github.com/SainsburyWellcomeCentre/beekeeper",  # required
             # Icon class (if "type": "fontawesome"),
             # or path to local image (if "type": "local")
             "icon": "fa-brands fa-github",

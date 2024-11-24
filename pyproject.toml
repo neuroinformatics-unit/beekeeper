@@ -1,91 +1,82 @@
 [project]
-name = "WAZP"
+name = "beekeeper"
 authors = [
-  {name = "Sofia Miñano", email = "s.minano@ucl.ac.uk"},
-  {name = "Nikoloz Sirmpilatze", email = "niko.sirbiladze@gmail.com"},
-  {name = "Sam Cunliffe", email = "s.cunliffe@ucl.ac.uk"},
-  {name = "Adam Tyson", email = "code@adamltyson.com"}
+  { name = "Sofia Miñano", email = "s.minano@ucl.ac.uk" },
+  { name = "Nikoloz Sirmpilatze", email = "niko.sirbiladze@gmail.com" },
+  { name = "Sam Cunliffe", email = "s.cunliffe@ucl.ac.uk" },
+  { name = "Adam Tyson", email = "code@adamltyson.com" },
 ]
-description = "Wasp Animal-tracking Zoo project with Pose estimation"
+description = "Managing video metadata for animal behaviour experiments"
 readme = "README.md"
 requires-python = ">=3.9.0"
 dynamic = ["version"]
 
-license = {text = "BSD-3-Clause"}
+license = { text = "BSD-3-Clause" }
 
 dependencies = [
   "tables",
   "blosc2",
   "numpy",
-  "pillow",
+  # "pillow",
   "pandas",
   "dash",
   "dash-bootstrap-components",
-  "opencv-python",
   "PyYAML",
-  "shapely",
   "openpyxl",
-  "defusedxml",
-  "pooch",
-  "tqdm",
-]
+  # "defusedxml",
+]  # TODO: review dependencies. Update to latest dash syntax
 
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Operating System :: OS Independent",
-    "License :: OSI Approved :: BSD License",
+  "Development Status :: 2 - Pre-Alpha",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Operating System :: OS Independent",
+  "License :: OSI Approved :: BSD License",
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/SainsburyWellcomeCentre/WAZP"
-"Bug tracker" = "https://github.com/SainsburyWellcomeCentre/WAZP/issues"
-"Documentation" = "https://SainsburyWellcomeCentre.github.io/WAZP"
-"Source code" = "https://github.com/SainsburyWellcomeCentre/WAZP"
-"User support" = "https://github.com/SainsburyWellcomeCentre/WAZP/issues"
+"Homepage" = "https://github.com/SainsburyWellcomeCentre/beekeeper"
+"Bug tracker" = "https://github.com/SainsburyWellcomeCentre/beekeeper/issues"
+"Documentation" = "https://SainsburyWellcomeCentre.github.io/beekeeper"
+"Source code" = "https://github.com/SainsburyWellcomeCentre/beekeeper"
+"User support" = "https://github.com/SainsburyWellcomeCentre/beekeeper/issues"
 
 [project.scripts]
-startwazp = "wazp.app:startwazp"
+start-beekeeper = "beekeeper.app:startbeekeeper"
 
 [project.optional-dependencies]
 dev = [
-    "pytest",
-    "pytest-cov",
-    "coverage",
-    "dash[testing]",
-    "tox",
-    "black",
-    "ruff",
-    "mypy",
-    "pre-commit",
-    "setuptools-scm",
-    "types-PyYAML",
-    "pandas-stubs",
-    "types-Pillow",
-]
-
+  "pytest",
+  "pytest-cov",
+  "coverage",
+  "dash[testing]",
+  "tox",
+  "black",
+  "ruff",
+  "mypy",
+  "pre-commit",
+  "setuptools-scm",
+  "types-PyYAML",
+  "pandas-stubs",
+  "types-Pillow",
+]  # TODO update with latest cookiecutter
 
 
 [build-system]
-requires = [
-    "setuptools>=45",
-    "wheel",
-    "setuptools_scm[toml]>=6.2",
-]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.packages.find]
-include = ["wazp*"]
+include = ["beekeeper*"]
 exclude = ["tests*", "docs*"]
 
 [tool.pytest.ini_options]
-addopts = "--cov=wazp"
+addopts = "--cov=beekeeper"
 
 [tool.black]
 target-version = ['py39', 'py310']
@@ -110,7 +101,7 @@ exclude = '''
 
 [tool.ruff]
 line-length = 88
-exclude = ["__init__.py","build",".eggs"]
+exclude = ["__init__.py", "build", ".eggs"]
 select = ["I", "E", "F"]
 fix = true
 
@@ -118,13 +109,13 @@ fix = true
 
 [tool.check-manifest]
 ignore = [
-    "*.yaml",
-    "tox.ini",
-    "tests/*",
-    "tests/test_unit/*",
-    "tests/test_integration/*",
-    "docs/",
-    "docs/source/",
+  "*.yaml",
+  "tox.ini",
+  "tests/*",
+  "tests/test_unit/*",
+  "tests/test_integration/*",
+  "docs/",
+  "docs/source/",
 ]
 
 [[tool.mypy.overrides]]

@@ -9,7 +9,7 @@ import pandas as pd
 import yaml
 from dash import Input, Output, State, dash_table, dcc, html
 
-from wazp import utils
+from beekeeper import utils
 
 # TODO: other video extensions? have this in project config file instead?
 VIDEO_TYPES = [".avi", ".mp4"]
@@ -351,7 +351,7 @@ def get_callbacks(app: dash.Dash) -> None:
             generate_yaml_tooltip = dbc.Tooltip(
                 "Generate metadata files from a selected spreadsheet. "
                 "Rows in the spreadsheet that do not correspond to a "
-                "video will be ignored."
+                "video will be ignored. "
                 "WARNING! This will overwrite any existing metadata "
                 "files with the same name!",
                 target="generate-yaml-files-button",

@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from wazp.datasets import get_sample_project
+from beekeeper.datasets import get_sample_project
 
 
 @pytest.fixture()

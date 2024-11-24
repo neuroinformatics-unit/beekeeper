@@ -4,7 +4,7 @@ import tempfile
 import pytest
 import yaml
 
-from wazp.utils import df_from_metadata_yaml_files
+from beekeeper.utils import df_from_metadata_yaml_files
 
 
 @pytest.fixture
