@@ -240,6 +240,13 @@ def get_callbacks(app: dash.Dash) -> None:
         """
 
         if not metadata_output_children:
+            # Check if config has been loaded
+            if not app_storage or "config" not in app_storage or "metadata_fields" not in app_storage:
+                return html.Div([
+                    html.H3("No configuration loaded"),
+                    html.P("Please upload a project configuration file from the Home page to begin."),
+                ])
+            
             metadata_table = create_metadata_table_component_from_df(
                 utils.df_from_metadata_yaml_files(
                     app_storage["config"]["videos_dir_path"],
@@ -661,7 +668,7 @@ def get_callbacks(app: dash.Dash) -> None:
 
             # convert all fields in dataframe to strings
             # (otherwise datetime fields are not encoded correctly in the YAML)
-            df = df.applymap(str)
+            df = df.map(str)
 
             # check if columns in spreadsheet match metadata file:
             # if not, add missing columns

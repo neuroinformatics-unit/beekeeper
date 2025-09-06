@@ -108,7 +108,7 @@ metadata.get_callbacks(app)
 
 
 def startbeekeeper():
-    app.run_server(debug=True)
+    app.run(debug=True)
 
 
 ###############

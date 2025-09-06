@@ -14,17 +14,13 @@ dynamic = ["version"]
 license = { text = "BSD-3-Clause" }
 
 dependencies = [
-  "tables",
-  "blosc2",
   "numpy",
-  # "pillow",
   "pandas",
   "dash",
   "dash-bootstrap-components",
   "PyYAML",
   "openpyxl",
-  # "defusedxml",
-]  # TODO: review dependencies. Update to latest dash syntax
+]
 
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
@@ -122,7 +118,6 @@ ignore = [
 module = [
   "dash.*",
   "dash_bootstrap_components.*",
-  "h5py.*",
   "matplotlib.*",
   "plotly.*",
   "cv2.*",
