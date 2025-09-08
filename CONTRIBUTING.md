@@ -1,8 +1,8 @@
-# Contributing to beekeeper
+# Contributing to `beekeeper`
 
 ## Introduction
 
-**Contributors to beekeeper are absolutely encouraged**, whether to fix a bug, develop a new feature, or improve the documentation.
+**Contributors to `beekeeper` are absolutely encouraged**, whether to fix a bug, develop a new feature, or improve the documentation.
 If you're unsure about any part of the contributing process, please get in touch. It's best to reach out in public, e.g. by opening an issue so that others can benefit from the discussion.
 
 ## Contributing code
@@ -10,7 +10,7 @@ If you're unsure about any part of the contributing process, please get in touch
 ### Creating a development environment
 
 It is recommended to use [conda](https://docs.conda.io/en/latest/) to install a development environment for
-beekeeper. Once you have `conda` installed, the following commands
+`beekeeper`. Once you have `conda` installed, the following commands
 will create and activate a `conda` environment with the requirements needed
 for a development environment:
 
@@ -19,7 +19,7 @@ conda create -n beekeeper-dev -c conda-forge python=3.12
 conda activate beekeeper-dev
 ```
 
-To install beekeeper for development, clone the GitHub repository, and then run from inside the repository:
+To install `beekeeper` for development, clone the GitHub repository, and then run from inside the repository:
 
 ```sh
 pip install -e '.[dev]'
@@ -139,7 +139,7 @@ We use [semantic versioning](https://semver.org/), which includes `MAJOR`.`MINOR
 * MINOR = new feature
 * MAJOR = breaking change
 
-We use [`setuptools_scm`](https://github.com/pypa/setuptools_scm) to automatically version beekeeper. It has been pre-configured in the `pyproject.toml` file. `setuptools_scm` will automatically infer the version using git. To manually set a new semantic version, create a tag and make sure the tag is pushed to GitHub. Make sure you commit any changes you wish to be included in this version. E.g. to bump the version to `1.0.0`:
+We use [`setuptools_scm`](https://github.com/pypa/setuptools_scm) to automatically version `beekeeper`. It has been pre-configured in the `pyproject.toml` file. `setuptools_scm` will automatically infer the version using git. To manually set a new semantic version, create a tag and make sure the tag is pushed to GitHub. Make sure you commit any changes you wish to be included in this version. E.g. to bump the version to `1.0.0`:
 
 ```sh
 git add .

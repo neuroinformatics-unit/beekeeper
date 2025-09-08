@@ -5,12 +5,12 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-# beekeeper 🐝
+# `beekeeper` 🐝
 Managing video metadata for animal behaviour experiments.
 
 ## Overview
 
-beekeeper is a web-based dashboard built with [Dash-Plotly](https://dash.plotly.com/) for managing video metadata in animal behaviour experiments. It provides an intuitive interface for creating, editing, and organizing metadata files associated with experimental videos.
+`beekeeper` is a web-based dashboard built with [Dash-Plotly](https://dash.plotly.com/) for managing video metadata in animal behaviour experiments. It provides an intuitive interface for creating, editing, and organizing metadata files associated with experimental videos.
 
 **Key Features:**
 - Upload and manage project configurations
