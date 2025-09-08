@@ -152,7 +152,7 @@ Pushing a tag to GitHub triggers the package's deployment to PyPI. The version n
 
 ## Contributing documentation
 
-The documentation is hosted via [GitHub pages](https://pages.github.com/) at [sainsburywellcomecentre.github.io/beekeeper/](https://sainsburywellcomecentre.github.io/beekeeper/). Its source files are located in the `docs` folder of this repository.
+The documentation is hosted via [GitHub pages](https://pages.github.com/) at [beekeeper.neuroinformatics.dev](https://beekeeper.neuroinformatics.dev/). Its source files are located in the `docs` folder of this repository.
 
 They are written in either [reStructuredText](https://docutils.sourceforge.io/rst.html) or [markdown](https://myst-parser.readthedocs.io/en/stable/syntax/typography.html).
 The `index.rst` file corresponds to the main page of the documentation website. Other `.rst`  or `.md` files are included in the main page via the `toctree` directive.
