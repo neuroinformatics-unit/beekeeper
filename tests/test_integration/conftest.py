@@ -62,22 +62,7 @@ def home_page_name_and_title():
 
 @pytest.fixture
 def metadata_page_name_and_title():
-    return ("01 metadata", "Metadata")
-
-
-@pytest.fixture
-def roi_page_name_and_title():
-    return ("02 roi", "ROI definition")
-
-
-@pytest.fixture
-def pose_estimation_page_name_and_title():
-    return ("03 pose estimation", "Pose estimation inference")
-
-
-@pytest.fixture
-def dashboard_page_name_and_title():
-    return ("04 dashboard", "Dashboard & data export")
+    return ("Metadata", "Metadata")
 
 
 @pytest.fixture

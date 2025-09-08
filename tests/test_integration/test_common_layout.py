@@ -71,9 +71,6 @@ unloaded_config_xfail = pytest.mark.xfail(
         for fx, mark in [
             ("home_page_name_and_title", []),
             ("metadata_page_name_and_title", unloaded_config_xfail),
-            ("roi_page_name_and_title", unloaded_config_xfail),
-            ("pose_estimation_page_name_and_title", []),
-            ("dashboard_page_name_and_title", unloaded_config_xfail),
         ]
     ],
 )
