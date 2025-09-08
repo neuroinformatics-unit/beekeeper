@@ -27,7 +27,7 @@ def get_callbacks(app: dash.Dash) -> None:
     def save_input_config_to_storage(
         up_content: str, up_filename: str, up_message_state: bool
     ) -> tuple[dict[Any, Any], bool, str, str]:
-        """Save project configuration file to temporary memory storage for the current session.
+        """Save project config to memory storage for the current session.
 
         See https://community.plotly.com/t/dash-plotly-share-callback-input-in-another-page-with-dcc-store/44190/2
 
@@ -53,7 +53,7 @@ def get_callbacks(app: dash.Dash) -> None:
             content of the upload message
         output_color : str
             color of the upload message
-        """  # noqa
+        """
 
         data_to_store = dict()
 
@@ -68,7 +68,8 @@ def get_callbacks(app: dash.Dash) -> None:
                     config = yaml.safe_load(base64.b64decode(content_str))
 
                     # get metadata fields dict
-                    with open(config["metadata_fields_file_path"]) as mdf:
+                    metadata_fields_path = config["metadata_fields_file_path"]
+                    with open(metadata_fields_path) as mdf:
                         metadata_fields_dict = yaml.safe_load(mdf)
 
                     # bundle data
@@ -88,10 +89,10 @@ def get_callbacks(app: dash.Dash) -> None:
                     # TODO: print path to config file instead?
 
             except Exception as e:
-                print(e)  # TODO: check this, it prints something odd
+                print(f"Error processing config: {e}")  
                 if not up_message_state:
                     up_message_state = not up_message_state
-                output_message = "There was an error processing the config file."
+                output_message = f"Error processing config file: {str(e)}"
                 output_color = "danger"
 
         return (data_to_store, up_message_state, output_message, output_color)
