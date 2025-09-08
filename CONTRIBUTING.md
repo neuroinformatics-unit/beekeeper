@@ -229,7 +229,7 @@ metadata.get_callbacks(app)
 
 #### **2. Session Storage Pattern**
 - **Storage Component**: `dcc.Store(id="session-storage")` maintains state across pages
-- **Data Structure**: 
+- **Data Structure**:
   ```python
   {
       "config": {...},           # Project configuration

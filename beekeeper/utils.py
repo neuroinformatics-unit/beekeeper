@@ -133,5 +133,3 @@ def export_selected_rows_as_yaml(
             yaml.dump(row, yamlf, sort_keys=False)
 
     return
-
-

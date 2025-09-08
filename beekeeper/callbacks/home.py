@@ -89,7 +89,7 @@ def get_callbacks(app: dash.Dash) -> None:
                     # TODO: print path to config file instead?
 
             except Exception as e:
-                print(f"Error processing config: {e}")  
+                print(f"Error processing config: {e}")
                 if not up_message_state:
                     up_message_state = not up_message_state
                 output_message = f"Error processing config file: {str(e)}"

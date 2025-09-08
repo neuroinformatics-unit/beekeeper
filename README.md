@@ -54,7 +54,7 @@ This will launch a local web server at `http://localhost:8050/`.
 - Upload your `project_config.yaml` file containing:
   ```yaml
   videos_dir_path: /path/to/your/videos
-  metadata_fields_file_path: /path/to/metadata_fields.yaml  
+  metadata_fields_file_path: /path/to/metadata_fields.yaml
   metadata_key_field_str: File
   ```
 
@@ -115,7 +115,7 @@ This will launch a local web server at `http://localhost:8050/`.
 
 #### **Spreadsheet Import Process**
 1. Prepare your spreadsheet (CSV or Excel) with columns matching your metadata fields
-2. Click **"Generate yaml files from spreadsheet"** 
+2. Click **"Generate yaml files from spreadsheet"**
 3. Upload your file
 4. The app will:
    - Match spreadsheet columns to metadata fields
