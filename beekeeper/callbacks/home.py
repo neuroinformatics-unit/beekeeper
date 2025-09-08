@@ -1,3 +1,9 @@
+"""Callback functions for the home page of the beekeeper application.
+
+This module contains the callback functions that handle user interactions
+on the home page, including configuration file uploads and session storage.
+"""
+
 import base64
 from typing import Any
 
@@ -13,6 +19,7 @@ def get_callbacks(app: dash.Dash) -> None:
     ----------
     app : dash.Dash
         Dash app object for which these callbacks are defined
+
     """
 
     @app.callback(
@@ -45,16 +52,16 @@ def get_callbacks(app: dash.Dash) -> None:
         data_to_store : dict
             dictionary with the following keys and values:
             - 'config': a dict with the project configuration parameters
-            - 'metadata_fields': a dict with a set of attributes (description, type...)
-            for each metadata field
+            - 'metadata_fields': a dict with a set of attributes
+            (description, type...) for each metadata field
         up_message_state : bool
             visibility of the upload message
         output_message : str
             content of the upload message
         output_color : str
             color of the upload message
-        """
 
+        """
         data_to_store = dict()
 
         # default parameters for confirmation message

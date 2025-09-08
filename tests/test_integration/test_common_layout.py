@@ -21,8 +21,8 @@ def test_components_created(
         Default fixture for Dash Python integration tests.
     timeout : float
         maximum time to wait in seconds for a component
-    """
 
+    """
     # start server
     dash_duo.start_server(app)
 
@@ -34,12 +34,16 @@ def test_components_created(
 
     # wait for sidebar to be rendered
     try:
-        dash_duo.wait_for_text_to_equal("#sidebar h2", "beekeeper 🐝", timeout=timeout)
+        dash_duo.wait_for_text_to_equal(
+            "#sidebar h2", "beekeeper 🐝", timeout=timeout
+        )
     except selenium.common.exceptions.TimeoutException:
         pytest.fail("Sidebar component not generated")
 
     # check there are no errors in browser console
-    assert dash_duo.get_logs() == [], f"There are {len(dash_duo.get_logs())} errors"
+    assert dash_duo.get_logs() == [], (
+        f"There are {len(dash_duo.get_logs())} errors"
+    )
     " in the browser console!"
 
 
@@ -79,8 +83,7 @@ def test_sidebar_links(
     timeout: float,
     request: pytest.FixtureRequest,
 ) -> None:
-    """Check the sidebar links take to the corresponding pages
-    and that no errors occur in the browser console
+    """Check the sidebar links take to the corresponding pages with no errors.
 
     The pages are checked via their title.
 
@@ -100,8 +103,8 @@ def test_sidebar_links(
     References
     ----------
     .. [1] https://docs.pytest.org/en/6.2.x/reference.html#std-fixture-request
-    """
 
+    """
     # get fixture value
     (page_name, page_title) = request.getfixturevalue(page_name_and_title)
 
@@ -129,4 +132,6 @@ def test_sidebar_links(
     # ...
 
     # NOTE: this is expected to fail for a few pages (hence the marked xfails)
-    assert dash_duo.get_logs() == [], "There are errors in the browser console!"
+    assert dash_duo.get_logs() == [], (
+        "There are errors in the browser console!"
+    )

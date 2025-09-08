@@ -1,4 +1,8 @@
-# -*- coding: utf-8 -*-
+"""Main Dash application module for beekeeper.
+
+This module contains the main Dash application initialization, layout
+definition, and callback registration for the beekeeper web application.
+"""
 
 import dash
 import dash_bootstrap_components as dbc
@@ -108,6 +112,7 @@ metadata.get_callbacks(app)
 
 
 def startbeekeeper():
+    """Start the beekeeper Dash application server."""
     app.run(debug=True)
 
 

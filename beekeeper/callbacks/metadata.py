@@ -1,7 +1,15 @@
+"""Callback functions for the metadata page of the beekeeper application.
+
+This module contains callback functions that handle metadata table operations,
+including adding/editing metadata, importing/exporting data, and managing
+video metadata files.
+"""
+
 import base64
 import io
 import pathlib as pl
 import re
+from typing import Any
 
 import dash
 import dash_bootstrap_components as dbc
@@ -21,13 +29,15 @@ VIDEO_TYPES = [".avi", ".mp4"]
 def create_metadata_table_component_from_df(
     df: pd.DataFrame,
     config: dict,
-) -> dash_table.DataTable:
+) -> Any:
     """Build a Dash table component populated with the input dataframe.
 
     Parameters
     ----------
     df : pd.DataFrame
         input dataframe
+    config : dict
+        configuration dictionary containing metadata field settings
 
     Returns
     -------
@@ -35,22 +45,25 @@ def create_metadata_table_component_from_df(
         dash table component built from input dataframe
 
     """
-
     # Change format of columns with string 'date' in their name from string to
     # datetime
     # (this is to allow sorting in the Dash table)
     # TODO: review this, is there a more failsafe way?
-    list_date_columns = [col for col in df.columns.tolist() if "date" in col.lower()]
+    list_date_columns = [  # type: ignore[attr-defined]
+        col for col in df.columns.tolist() if "date" in col.lower()
+    ]
     for col in list_date_columns:
         df[col] = pd.to_datetime(df[col]).dt.strftime("%Y-%m-%d")
 
     # Reorder columns to ensure key metadata field is first
     key_field = config["metadata_key_field_str"]
-    columns_ordered = [key_field] + [col for col in df.columns if col != key_field]
+    columns_ordered = [key_field] + [
+        col for col in df.columns if col != key_field
+    ]
     df = df[columns_ordered]
 
     # dash table component
-    table = dash_table.DataTable(
+    table = dash_table.DataTable(  # type: ignore[attr-defined]
         id="metadata-table",
         data=df.to_dict("records"),
         data_previous=None,
@@ -59,19 +72,15 @@ def create_metadata_table_component_from_df(
             {
                 "id": c,
                 "name": c,
-                "hideable": (True if c != config["metadata_key_field_str"] else False),
-                "editable": (
-                    True
-                    if c
-                    not in [
-                        # config["metadata_key_field_str"],
-                        # TODO: make Filename not editable?
-                        # (if so, then 'Add empty row' doesnt make sense)
-                        "Events",  # TODO: can we not hardcode this?
-                        "ROIs",  # TODO: can we not hardcode this?
-                    ]
-                    else False
-                ),
+                "hideable": c != config["metadata_key_field_str"],
+                "editable": c
+                not in [
+                    # config["metadata_key_field_str"],
+                    # TODO: make Filename not editable?
+                    # (if so, then 'Add empty row' doesn't make sense)
+                    "Events",  # TODO: can we not hardcode this?
+                    "ROIs",  # TODO: can we not hardcode this?
+                ],
                 "presentation": "input",
             }
             for c in df.columns
@@ -202,9 +211,8 @@ def create_metadata_table_component_from_df(
 #############################
 # Callbacks
 ###########################
-def get_callbacks(app: dash.Dash) -> None:
+def get_callbacks(app: dash.Dash) -> None:  # noqa: C901
     """Return all callback functions for the metadata tab.
-
 
     Parameters
     ----------
@@ -221,10 +229,9 @@ def get_callbacks(app: dash.Dash) -> None:
     def create_metadata_table_and_buttons(
         metadata_output_children: list, app_storage: dict
     ) -> html.Div:
-        """Generate html component with a table holding the
-        metadata per video and with auxiliary buttons for
-        common table manipulations.
+        """Generate html component with a table holding the metadata per video.
 
+        The component includes auxiliary buttons for common table operations.
         The project configuration file is read from temporary
         memory storage for the current session.
 
@@ -242,8 +249,8 @@ def get_callbacks(app: dash.Dash) -> None:
         html.Div
             html component holding the metadata dash_table and
             the auxiliary buttons for common table manipulations
-        """
 
+        """
         if not metadata_output_children:
             # Check if config has been loaded
             if (
@@ -255,8 +262,8 @@ def get_callbacks(app: dash.Dash) -> None:
                     [
                         html.H3("No configuration loaded"),
                         html.P(
-                            "Please upload a project configuration file from the "
-                            "Home page to begin."
+                            "Please upload a project configuration file from "
+                            "the Home page to begin."
                         ),
                     ]
                 )
@@ -326,7 +333,9 @@ def get_callbacks(app: dash.Dash) -> None:
                         dcc.Upload(
                             id="upload-spreadsheet",
                             children=dbc.Button(
-                                children=("Generate yaml files from spreadsheet"),
+                                children=(
+                                    "Generate yaml files from spreadsheet"
+                                ),
                                 id="generate-yaml-files-button",
                                 n_clicks=0,
                                 **button_style,  # {"margin-right": "10px"},
@@ -389,6 +398,9 @@ def get_callbacks(app: dash.Dash) -> None:
                 ]
             )
 
+        # If metadata_output_children already exists, return it unchanged
+        return html.Div(metadata_output_children)
+
     @app.callback(
         Output("metadata-table", "data"),
         Output("add-row-manually-button", "n_clicks"),
@@ -434,8 +446,8 @@ def get_callbacks(app: dash.Dash) -> None:
             number of clicks on the 'add row manually' button
         n_clicks_add_rows_missing : int
             number of clicks on the 'add missing rows' button
-        """
 
+        """
         # Add empty rows manually
         if n_clicks_add_row_manually > 0 and table_columns:
             table_rows.append({c["id"]: "" for c in table_columns})
@@ -448,7 +460,8 @@ def get_callbacks(app: dash.Dash) -> None:
 
             # List of files currently shown in table
             list_files_in_table = [
-                d[app_storage["config"]["metadata_key_field_str"]] for d in table_rows
+                d[app_storage["config"]["metadata_key_field_str"]]
+                for d in table_rows
             ]
 
             # List of videos w/o metadata and not in table
@@ -456,7 +469,9 @@ def get_callbacks(app: dash.Dash) -> None:
             list_metadata_files = []
             for f in pl.Path(video_dir).iterdir():
                 if str(f).endswith(".metadata.yaml"):
-                    list_metadata_files.append(re.sub(".metadata$", "", f.stem))
+                    list_metadata_files.append(
+                        re.sub(".metadata$", "", f.stem)
+                    )
                 elif any(v in str(f) for v in VIDEO_TYPES):
                     list_video_files.append(f)  # list of PosixPaths
             list_videos_wo_metadata = [
@@ -471,7 +486,8 @@ def get_callbacks(app: dash.Dash) -> None:
                 table_rows.append(
                     {
                         c["id"]: vid
-                        if c["id"] == app_storage["config"]["metadata_key_field_str"]
+                        if c["id"]
+                        == app_storage["config"]["metadata_key_field_str"]
                         else ""
                         for c in table_columns
                     }
@@ -523,6 +539,8 @@ def get_callbacks(app: dash.Dash) -> None:
         ----------
         n_clicks_select_all : int
             number of clicks on the 'select all' button
+        n_clicks_unselect_all : int
+            number of clicks on the 'unselect all' button
         n_clicks_export : int
             number of clicks on the 'export' button
         data_previous : list[dict]
@@ -552,6 +570,7 @@ def get_callbacks(app: dash.Dash) -> None:
             visibility of the information message
         alert_message : str
             text of the information message
+
         """
         # TODO: select all rows *per page*?
 
@@ -626,7 +645,7 @@ def get_callbacks(app: dash.Dash) -> None:
         import_message_state: bool,
         app_storage: dict,
     ):
-        """Generate yaml files from spreadsheet
+        """Generate yaml files from spreadsheet.
 
         From example at
         https://dash.plotly.com/dash-core-components/upload#displaying-uploaded-spreadsheet-contents
@@ -639,6 +658,8 @@ def get_callbacks(app: dash.Dash) -> None:
             name of the uploaded spreadsheet
         import_message_state : bool
             visibility state of the import message
+        app_storage : dict
+            data held in temporary memory storage, accessible to all tabs
 
         Returns
         -------
@@ -648,6 +669,7 @@ def get_callbacks(app: dash.Dash) -> None:
             text of the import message
         import_message_color : str
             color of the import message
+
         """
         import_message_text = ""
         import_message_color = "warning"
@@ -677,7 +699,9 @@ def get_callbacks(app: dash.Dash) -> None:
             except Exception as e:
                 print(e)
                 import_message_state = True
-                import_message_text = "There was an error reading" f" this file ({e})."
+                import_message_text = (
+                    f"There was an error reading this file ({e})."
+                )
                 import_message_color = "danger"
 
             # convert all fields in dataframe to strings
@@ -702,7 +726,9 @@ def get_callbacks(app: dash.Dash) -> None:
             # in the video dir
             # TODO: select whether to overwrite existing YAML?
             video_dir = app_storage["config"]["videos_dir_path"]
-            field_to_use_as_filename = app_storage["config"]["metadata_key_field_str"]
+            field_to_use_as_filename = app_storage["config"][
+                "metadata_key_field_str"
+            ]
 
             list_filepaths_to_check = [
                 pl.Path(video_dir, row[field_to_use_as_filename])
@@ -710,14 +736,17 @@ def get_callbacks(app: dash.Dash) -> None:
             ]
             list_dict_per_row = [
                 row
-                for row, fpath in zip(list_dict_per_row, list_filepaths_to_check)
+                for row, fpath in zip(
+                    list_dict_per_row, list_filepaths_to_check
+                )
                 if pl.Path(fpath).is_file() or pl.Path(fpath).is_symlink()
             ]
 
             # dump as yaml files
             for row in list_dict_per_row:
                 yaml_filename = (
-                    pl.Path(row[field_to_use_as_filename]).stem + ".metadata.yaml"
+                    pl.Path(row[field_to_use_as_filename]).stem
+                    + ".metadata.yaml"
                 )
 
                 with open(pl.Path(video_dir) / yaml_filename, "w") as yamlf:
@@ -737,3 +766,5 @@ def get_callbacks(app: dash.Dash) -> None:
             import_message_text,
             import_message_color,
         )
+
+    return None

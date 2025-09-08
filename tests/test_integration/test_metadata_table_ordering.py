@@ -21,11 +21,12 @@ def sample_project_with_key_field(sample_project, request):
     -------
     Path
         Path to the sample project with modified config
+
     """
     key_field = request.param
 
     # Read existing project config and only modify the key field
-    with open(sample_project / "project_config.yaml", "r") as f:
+    with open(sample_project / "project_config.yaml") as f:
         project_config = yaml.safe_load(f)
 
     # Modify only the metadata_key_field_str
@@ -47,10 +48,11 @@ def test_key_metadata_field_first_column(
     timeout: float,
     request,
 ) -> None:
-    """Test that the key metadata field appears as the first column in the table.
+    """Test that the key metadata field is the first column in the table.
 
-    This test verifies that regardless of what field is specified as the key field,
-    it always appears as the first column in the metadata table.
+    This test verifies that regardless of what field is specified
+    as the key field, it always appears as the first column in the
+    metadata table.
 
     Parameters
     ----------
@@ -62,6 +64,7 @@ def test_key_metadata_field_first_column(
         maximum time to wait in seconds for a component
     request : pytest.FixtureRequest
         Pytest request object to access test parameters
+
     """
     key_field = request.node.callspec.params["sample_project_with_key_field"]
 
@@ -73,14 +76,18 @@ def test_key_metadata_field_first_column(
     dash_duo.wait_for_text_to_equal("h1", "Home", timeout=timeout)
 
     # Upload the project config file
-    upload_element = dash_duo.find_element("#upload-config-file input[type='file']")
+    upload_element = dash_duo.find_element(
+        "#upload-config-file input[type='file']"
+    )
     config_path = str(sample_project_with_key_field / "project_config.yaml")
     upload_element.send_keys(config_path)
 
     # Wait for config to be processed
     try:
         dash_duo.wait_for_text_to_equal(
-            "#alert div", "Configuration file uploaded successfully!", timeout=timeout
+            "#alert div",
+            "Configuration file uploaded successfully!",
+            timeout=timeout,
         )
     except selenium.common.exceptions.TimeoutException:
         pytest.fail("Config upload alert not shown")
@@ -101,17 +108,17 @@ def test_key_metadata_field_first_column(
     # Verify that the key field is the first column
     assert len(table_headers) >= 4, "Table should have at least 4 columns"
     first_column_text = table_headers[0].text.strip()
-    assert (
-        first_column_text == key_field
-    ), f"First column should be '{key_field}' but was '{first_column_text}'"
+    assert first_column_text == key_field, (
+        f"First column should be '{key_field}' but was '{first_column_text}'"
+    )
 
     # Verify other expected columns are present
     all_headers = [header.text.strip() for header in table_headers]
     expected_columns = ["File", "Species_name", "Date_start", "Date_end"]
     for col in expected_columns:
-        assert (
-            col in all_headers
-        ), f"Column '{col}' not found in table headers: {all_headers}"
+        assert col in all_headers, (
+            f"Column '{col}' not found in table headers: {all_headers}"
+        )
 
     # Check for console errors
     logs = dash_duo.get_logs()

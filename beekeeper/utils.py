@@ -1,3 +1,9 @@
+"""Utility functions for the beekeeper application.
+
+This module contains helper functions for processing metadata files,
+dataframe operations, and file management.
+"""
+
 import pathlib as pl
 
 import pandas as pd
@@ -7,13 +13,11 @@ import yaml
 def df_from_metadata_yaml_files(
     parent_dir: str, metadata_fields_dict: dict
 ) -> pd.DataFrame:
-    """Build a dataframe from all the metadata.yaml files in the input parent
-    directory.
+    """Build a dataframe from all metadata.yaml files in the parent directory.
 
     If there are no metadata.yaml files in the parent directory, make a
     dataframe with the columns as defined in the metadata fields
-    description and empty (string) fields
-
+    description and empty (string) fields.
 
     Parameters
     ----------
@@ -26,8 +30,8 @@ def df_from_metadata_yaml_files(
     -------
     pd.DataFrame
         a pandas dataframe in which each row holds the metadata for one video
-    """
 
+    """
     # List of metadata files in parent directory
     list_metadata_files = [
         str(f)
@@ -39,7 +43,7 @@ def df_from_metadata_yaml_files(
     #  build dataframe from metadata_fields_dict
     if not list_metadata_files:
         return pd.DataFrame.from_dict(
-            {c: [""] for c in metadata_fields_dict.keys()},
+            {c: [""] for c in metadata_fields_dict},
             orient="columns",
         )
     # If there are metadata (yaml) files:
@@ -66,8 +70,7 @@ def df_from_metadata_yaml_files(
 def set_edited_row_checkbox_to_true(
     data_previous: list[dict], data: list[dict], list_selected_rows: list[int]
 ) -> list[int]:
-    """Set a metadata table row's checkbox to True
-    when its data is edited.
+    """Set a metadata table row's checkbox to True when its data is edited.
 
     Parameters
     ----------
@@ -83,8 +86,8 @@ def set_edited_row_checkbox_to_true(
     -------
     list_selected_rows : list[int]
         a list of indices for the currently selected rows
-    """
 
+    """
     # Compute difference between current and previous table
     # TODO: faster if I compare dicts rather than dfs?
     # (that would be: find the dict in the 'data' list with
@@ -118,8 +121,8 @@ def export_selected_rows_as_yaml(
     app_storage : dict
         data held in temporary memory storage,
         accessible to all tabs in the app
-    """
 
+    """
     # Export selected rows
     for row in [data[i] for i in list_selected_rows]:
         # extract key per row

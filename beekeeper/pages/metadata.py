@@ -1,3 +1,9 @@
+"""Metadata page layout for the beekeeper application.
+
+This module defines the layout for the metadata page where users
+can view and manage video metadata.
+"""
+
 import dash
 from dash import html
 
