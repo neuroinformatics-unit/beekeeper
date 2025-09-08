@@ -44,6 +44,11 @@ def create_metadata_table_component_from_df(
     for col in list_date_columns:
         df[col] = pd.to_datetime(df[col]).dt.strftime("%Y-%m-%d")
 
+    # Reorder columns to ensure key metadata field is first
+    key_field = config["metadata_key_field_str"]
+    columns_ordered = [key_field] + [col for col in df.columns if col != key_field]
+    df = df[columns_ordered]
+
     # dash table component
     table = dash_table.DataTable(
         id="metadata-table",
@@ -241,12 +246,21 @@ def get_callbacks(app: dash.Dash) -> None:
 
         if not metadata_output_children:
             # Check if config has been loaded
-            if not app_storage or "config" not in app_storage or "metadata_fields" not in app_storage:
-                return html.Div([
-                    html.H3("No configuration loaded"),
-                    html.P("Please upload a project configuration file from the Home page to begin."),
-                ])
-            
+            if (
+                not app_storage
+                or "config" not in app_storage
+                or "metadata_fields" not in app_storage
+            ):
+                return html.Div(
+                    [
+                        html.H3("No configuration loaded"),
+                        html.P(
+                            "Please upload a project configuration file from the "
+                            "Home page to begin."
+                        ),
+                    ]
+                )
+
             metadata_table = create_metadata_table_component_from_df(
                 utils.df_from_metadata_yaml_files(
                     app_storage["config"]["videos_dir_path"],
