@@ -33,11 +33,11 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/SainsburyWellcomeCentre/beekeeper"
-"Bug tracker" = "https://github.com/SainsburyWellcomeCentre/beekeeper/issues"
-"Documentation" = "https://SainsburyWellcomeCentre.github.io/beekeeper"
-"Source code" = "https://github.com/SainsburyWellcomeCentre/beekeeper"
-"User support" = "https://github.com/SainsburyWellcomeCentre/beekeeper/issues"
+"Homepage" = "https://github.com/sfmig/beekeeper"
+"Bug tracker" = "https://github.com/sfmig/beekeeper/issues"
+# "Documentation" = "https://sfmig.github.io/beekeeper"
+"Source code" = "https://github.com/sfmig/beekeeper"
+# "User support" = "https://github.com/sfmig/beekeeper/issues"
 
 [project.scripts]
 start-beekeeper = "beekeeper.app:startbeekeeper"
