@@ -737,7 +737,7 @@ def get_callbacks(app: dash.Dash) -> None:  # noqa: C901
             list_dict_per_row = [
                 row
                 for row, fpath in zip(
-                    list_dict_per_row, list_filepaths_to_check
+                    list_dict_per_row, list_filepaths_to_check, strict=False
                 )
                 if pl.Path(fpath).is_file() or pl.Path(fpath).is_symlink()
             ]

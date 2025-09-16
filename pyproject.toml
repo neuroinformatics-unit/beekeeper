@@ -8,7 +8,7 @@ authors = [
 ]
 description = "Managing video metadata for animal behaviour experiments"
 readme = "README.md"
-requires-python = ">=3.9.0"
+requires-python = ">=3.11.0"
 dynamic = ["version"]
 
 license = { text = "BSD-3-Clause" }
@@ -26,8 +26,8 @@ classifiers = [
   "Development Status :: 2 - Pre-Alpha",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "Operating System :: OS Independent",
   "License :: OSI Approved :: BSD License",
 ]
@@ -49,15 +49,16 @@ dev = [
   "coverage",
   "dash[testing]",
   "tox",
-  "black",
   "ruff",
   "mypy",
   "pre-commit",
   "setuptools-scm",
+  "check-manifest",
+  "codespell",
   "types-PyYAML",
   "pandas-stubs",
   "types-Pillow",
-]  # TODO update with latest cookiecutter
+]
 
 
 [build-system]
@@ -74,26 +75,6 @@ exclude = ["tests*", "docs*"]
 [tool.pytest.ini_options]
 addopts = "--cov=beekeeper"
 
-[tool.black]
-target-version = ['py39', 'py310']
-skip-string-normalization = false
-exclude = '''
-(
-  /(
-      \.eggs
-    | \.git
-    | \.hg
-    | \.mypy_cache
-    | \.tox
-    | \.venv
-    | _build
-    | buck-out
-    | build
-    | dist
-    | examples
-  )/
-)
-'''
 
 [tool.ruff]
 line-length = 79
@@ -132,6 +113,10 @@ per-file-ignores = { "tests/*" = [
 [tool.ruff.format]
 docstring-code-format = true # Also format code in docstrings
 
+[tool.codespell]
+skip = '.git,.tox'
+check-hidden = true
+
 [tool.setuptools_scm]
 
 [tool.check-manifest]
@@ -139,10 +124,7 @@ ignore = [
   "*.yaml",
   "tox.ini",
   "tests/*",
-  "tests/test_unit/*",
-  "tests/test_integration/*",
-  "docs/",
-  "docs/source/",
+  "docs/*",
 ]
 
 [[tool.mypy.overrides]]

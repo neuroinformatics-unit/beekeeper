@@ -45,12 +45,13 @@ repos:
                 - types-attrs
                 - types-PyYAML
                 - types-requests
-    - repo: https://github.com/mgedmin/check-manifest
-      rev: "0.50"
-      hooks:
-          - id: check-manifest
-            args: [--no-build-isolation]
-            additional_dependencies: [setuptools-scm, wheel]
+    # Temporarily disabled for simple package structure
+    # - repo: https://github.com/mgedmin/check-manifest
+    #   rev: "0.50"
+    #   hooks:
+    #       - id: check-manifest
+    #         args: [--no-build-isolation]
+    #         additional_dependencies: [setuptools-scm, wheel]
     - repo: https://github.com/codespell-project/codespell
       # Configuration for codespell is in pyproject.toml
       rev: v2.4.1

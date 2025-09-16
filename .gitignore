@@ -87,3 +87,7 @@ venv/
 
 # written by setuptools_scm
 **/_version.py
+
+
+# Claude
+.claude/commands/prep-conda.md

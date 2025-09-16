@@ -41,23 +41,25 @@ In all cases, please submit code to the main repository via a pull request. We r
 
 ### Formatting and pre-commit hooks
 
-Running `pre-commit install` will set up [pre-commit hooks](https://pre-commit.com/) to ensure a consistent formatting style. Currently, these are:
-* [ruff](https://github.com/charliermarsh/ruff) does a number of jobs, including enforcing PEP8 and sorting imports
-* [black](https://black.readthedocs.io/en/stable/) for auto-formatting
-* [mypy](https://mypy.readthedocs.io/en/stable/index.html) as a static type checker
+Running `pre-commit install` will set up [pre-commit hooks](https://pre-commit.com/) to ensure a consistent formatting style. Currently, these include:
+* [ruff](https://github.com/astral-sh/ruff) does a number of jobs, including code linting and auto-formatting.
+* [mypy](https://mypy.readthedocs.io/en/stable/index.html) as a static type checker.
+* [codespell](https://github.com/codespell-project/codespell) to check for common misspellings.
 
-These will prevent code from being committed if any of these hooks fail. To run them individually (from the root of the repository), you can use:
-```sh
-ruff .
-black ./
-mypy -p beekeeper
-```
-
+These will prevent code from being committed if any of these hooks fail.
 To run all the hooks before committing:
 
 ```sh
 pre-commit run  # for staged files
 pre-commit run -a  # for all files in the repository
+```
+
+Some problems will be automatically fixed by the hooks. In this case, you should
+stage the auto-fixed changes and run the hooks again:
+
+```sh
+git add .
+pre-commit run
 ```
 
 ### Testing
