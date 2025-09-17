@@ -35,9 +35,10 @@ classifiers = [
 [project.urls]
 "Homepage" = "https://github.com/neuroinformatics-unit/beekeeper"
 "Bug tracker" = "https://github.com/neuroinformatics-unit/beekeeper/issues"
-# "Documentation" = "https://sfmig.github.io/beekeeper"
+# "Documentation" = "https://beekeeper.neuroinformatics.dev"
 "Source code" = "https://github.com/neuroinformatics-unit/beekeeper"
-# "User support" = "https://github.com/neuroinformatics-unit/beekeeper/issues"
+"User support" = "https://github.com/neuroinformatics-unit/beekeeper/issues"
+
 
 [project.scripts]
 start-beekeeper = "beekeeper.app:startbeekeeper"
@@ -49,7 +50,6 @@ dev = [
   "coverage",
   "dash[testing]",
   "tox",
-  "black",
   "ruff",
   "mypy",
   "pre-commit",
@@ -57,7 +57,7 @@ dev = [
   "types-PyYAML",
   "pandas-stubs",
   "types-Pillow",
-] # TODO update with latest cookiecutter
+]
 
 
 [build-system]
@@ -74,30 +74,31 @@ exclude = ["tests*", "docs*"]
 [tool.pytest.ini_options]
 addopts = "--cov=beekeeper"
 
-[tool.black]
-target-version = ['py39', 'py310']
-skip-string-normalization = false
-exclude = '''
-(
-  /(
-      \.eggs
-    | \.git
-    | \.hg
-    | \.mypy_cache
-    | \.tox
-    | \.venv
-    | _build
-    | buck-out
-    | build
-    | dist
-    | examples
-  )/
-)
-'''
+[tool.setuptools_scm]
+
+[tool.check-manifest]
+ignore = [
+  "*.yaml",
+  "tox.ini",
+  "tests/*",
+  "tests/test_unit/*",
+  "tests/test_integration/*",
+  "docs/",
+  "docs/source/",
+]
+
+[[tool.mypy.overrides]]
+module = [
+  "dash.*",
+  "dash_bootstrap_components.*",
+  "plotly.*",
+]
+ignore_missing_imports = true
 
 [tool.ruff]
-line-length = 79
-exclude = ["__init__.py", "build", ".eggs"]
+line-length = 88
+exclude = ["__init__.py","build",".eggs"]
+select = ["I", "E", "F"]
 fix = true
 
 [tool.ruff.lint]
@@ -121,37 +122,30 @@ per-file-ignores = { "tests/*" = [
   "D100", # missing docstring in public module
   "D205", # missing blank line between summary and description
   "D103", # missing docstring in public function
-], "examples/*" = [
-  "B018", # Found useless expression
-  "D103", # Missing docstring in public function
-  "D400", # first line should end with a period.
-  "D415", # first line should end with a period, question mark...
-  "D205", # missing blank line between summary and description
 ] }
 
 [tool.ruff.format]
 docstring-code-format = true # Also format code in docstrings
 
-[tool.setuptools_scm]
+[tool.codespell]
+skip = '.git,.tox'
+check-hidden = true
 
-[tool.check-manifest]
-ignore = [
-  "*.yaml",
-  "tox.ini",
-  "tests/*",
-  "tests/test_unit/*",
-  "tests/test_integration/*",
-  "docs/",
-  "docs/source/",
-]
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py{311,312,313}
+isolated_build = True
 
-[[tool.mypy.overrides]]
-module = [
-  "dash.*",
-  "dash_bootstrap_components.*",
-  "matplotlib.*",
-  "plotly.*",
-  "cv2.*",
-  "shapely.*",
-]
-ignore_missing_imports = true
+[gh-actions]
+python =
+    3.11: py311
+    3.12: py312
+    3.13: py313
+
+[testenv]
+extras =
+    dev
+commands =
+    pytest -v --color=yes --cov=beekeeper --cov-report=xml
+"""
