@@ -1,5 +1,5 @@
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-orange.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![CI](https://img.shields.io/github/actions/workflow/status/SainsburyWellcomeCentre/beekeeper/test_and_deploy.yml?label=CI)](https://github.com/sfmig/beekeeper/actions)
+[![CI](https://img.shields.io/github/actions/workflow/status/SainsburyWellcomeCentre/beekeeper/test_and_deploy.yml?label=CI)](https://github.com/neuroinformatics-unit/beekeeper/actions)
 [![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
@@ -27,7 +27,7 @@ Install `beekeeper` inside a [conda](https://docs.conda.io/en/latest/) environme
 ```sh
 conda create -n beekeeper-env -c conda-forge python=3.12
 conda activate beekeeper-env
-git clone https://github.com/sfmig/beekeeper.git
+git clone https://github.com/neuroinformatics-unit/beekeeper.git
 cd beekeeper
 pip install .
 ```

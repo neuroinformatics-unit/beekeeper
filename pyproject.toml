@@ -33,11 +33,11 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/sfmig/beekeeper"
-"Bug tracker" = "https://github.com/sfmig/beekeeper/issues"
+"Homepage" = "https://github.com/neuroinformatics-unit/beekeeper"
+"Bug tracker" = "https://github.com/neuroinformatics-unit/beekeeper/issues"
 # "Documentation" = "https://sfmig.github.io/beekeeper"
-"Source code" = "https://github.com/sfmig/beekeeper"
-# "User support" = "https://github.com/sfmig/beekeeper/issues"
+"Source code" = "https://github.com/neuroinformatics-unit/beekeeper"
+# "User support" = "https://github.com/neuroinformatics-unit/beekeeper/issues"
 
 [project.scripts]
 start-beekeeper = "beekeeper.app:startbeekeeper"
@@ -57,7 +57,7 @@ dev = [
   "types-PyYAML",
   "pandas-stubs",
   "types-Pillow",
-]  # TODO update with latest cookiecutter
+] # TODO update with latest cookiecutter
 
 
 [build-system]
