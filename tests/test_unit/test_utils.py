@@ -102,8 +102,8 @@ def test_create_metadata_table_component_column_ordering(
 
     # Verify our setup: key field should not be first in the original DataFrame
     assert df.columns[0] != key_field, (
-        f"Test setup error: '{key_field}' should not "
-        "be first in original DataFrame"
+        f"Test setup error: '{key_field}' "
+        "should not be first in original DataFrame"
     )
 
     # Create config with the specified key field

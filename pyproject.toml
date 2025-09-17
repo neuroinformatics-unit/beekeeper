@@ -96,9 +96,8 @@ module = [
 ignore_missing_imports = true
 
 [tool.ruff]
-line-length = 88
-exclude = ["__init__.py","build",".eggs"]
-select = ["I", "E", "F"]
+line-length = 79
+exclude = ["__init__.py", "build", ".eggs"]
 fix = true
 
 [tool.ruff.lint]
