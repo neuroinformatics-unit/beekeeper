@@ -24,7 +24,12 @@ conda activate beekeeper-dev
 
 # Install for development
 pip install -e '.[dev]'
+
+# Install pre-commit hooks
+pre-commit install
 ```
+Please double check that pre-commit hooks are running locally and passing before committing.
+
 
 ### Core Commands
 ```bash
