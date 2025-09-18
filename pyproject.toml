@@ -1,5 +1,5 @@
 [project]
-name = "beekeeper"
+name = "beekeeping"
 authors = [
   { name = "Sofia Miñano", email = "s.minano@ucl.ac.uk" },
   { name = "Nikoloz Sirmpilatze", email = "niko.sirbiladze@gmail.com" },
