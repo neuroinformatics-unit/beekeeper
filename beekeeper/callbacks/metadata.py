@@ -73,14 +73,7 @@ def create_metadata_table_component_from_df(
                 "id": c,
                 "name": c,
                 "hideable": c != config["metadata_key_field_str"],
-                "editable": c
-                not in [
-                    # config["metadata_key_field_str"],
-                    # TODO: make Filename not editable?
-                    # (if so, then 'Add empty row' doesn't make sense)
-                    "Events",  # TODO: can we not hardcode this?
-                    "ROIs",  # TODO: can we not hardcode this?
-                ],
+                "editable": True,
                 "presentation": "input",
             }
             for c in df.columns
