@@ -1,140 +1,146 @@
 [project]
-name = "WAZP"
+name = "beekeeping"
 authors = [
-  {name = "Sofia Miñano", email = "s.minano@ucl.ac.uk"},
-  {name = "Nikoloz Sirmpilatze", email = "niko.sirbiladze@gmail.com"},
-  {name = "Sam Cunliffe", email = "s.cunliffe@ucl.ac.uk"},
-  {name = "Adam Tyson", email = "code@adamltyson.com"}
+  { name = "Sofia Miñano", email = "s.minano@ucl.ac.uk" },
+  { name = "Nikoloz Sirmpilatze", email = "niko.sirbiladze@gmail.com" },
+  { name = "Sam Cunliffe", email = "s.cunliffe@ucl.ac.uk" },
+  { name = "Adam Tyson", email = "code@adamltyson.com" },
 ]
-description = "Wasp Animal-tracking Zoo project with Pose estimation"
+description = "Manage video metadata for animal behaviour experiments"
 readme = "README.md"
-requires-python = ">=3.9.0"
+requires-python = ">=3.11.0"
 dynamic = ["version"]
 
-license = {text = "BSD-3-Clause"}
+license = { text = "BSD-3-Clause" }
 
 dependencies = [
-  "tables",
-  "blosc2",
   "numpy",
-  "pillow",
   "pandas",
   "dash",
   "dash-bootstrap-components",
-  "opencv-python",
   "PyYAML",
-  "shapely",
   "openpyxl",
-  "defusedxml",
-  "pooch",
-  "tqdm",
 ]
 
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
-    "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Operating System :: OS Independent",
-    "License :: OSI Approved :: BSD License",
+  "Development Status :: 2 - Pre-Alpha",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Operating System :: OS Independent",
+  "License :: OSI Approved :: BSD License",
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/SainsburyWellcomeCentre/WAZP"
-"Bug tracker" = "https://github.com/SainsburyWellcomeCentre/WAZP/issues"
-"Documentation" = "https://SainsburyWellcomeCentre.github.io/WAZP"
-"Source code" = "https://github.com/SainsburyWellcomeCentre/WAZP"
-"User support" = "https://github.com/SainsburyWellcomeCentre/WAZP/issues"
+"Homepage" = "https://github.com/neuroinformatics-unit/beekeeping"
+"Bug tracker" = "https://github.com/neuroinformatics-unit/beekeeping/issues"
+# "Documentation" = "https://beekeeping.neuroinformatics.dev"
+"Source code" = "https://github.com/neuroinformatics-unit/beekeeping"
+"User support" = "https://github.com/neuroinformatics-unit/beekeeping/issues"
+
 
 [project.scripts]
-startwazp = "wazp.app:startwazp"
+start-beekeeping = "beekeeping.app:startbeekeeping"
 
 [project.optional-dependencies]
 dev = [
-    "pytest",
-    "pytest-cov",
-    "coverage",
-    "dash[testing]",
-    "tox",
-    "black",
-    "ruff",
-    "mypy",
-    "pre-commit",
-    "setuptools-scm",
-    "types-PyYAML",
-    "pandas-stubs",
-    "types-Pillow",
+  "pytest",
+  "pytest-cov",
+  "coverage",
+  "dash[testing]",
+  "tox",
+  "ruff",
+  "mypy",
+  "pre-commit",
+  "setuptools-scm",
+  "types-PyYAML",
+  "pandas-stubs",
 ]
-
 
 
 [build-system]
-requires = [
-    "setuptools>=45",
-    "wheel",
-    "setuptools_scm[toml]>=6.2",
-]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.packages.find]
-include = ["wazp*"]
+include = ["beekeeping*"]
 exclude = ["tests*", "docs*"]
 
 [tool.pytest.ini_options]
-addopts = "--cov=wazp"
-
-[tool.black]
-target-version = ['py39', 'py310']
-skip-string-normalization = false
-exclude = '''
-(
-  /(
-      \.eggs
-    | \.git
-    | \.hg
-    | \.mypy_cache
-    | \.tox
-    | \.venv
-    | _build
-    | buck-out
-    | build
-    | dist
-    | examples
-  )/
-)
-'''
-
-[tool.ruff]
-line-length = 88
-exclude = ["__init__.py","build",".eggs"]
-select = ["I", "E", "F"]
-fix = true
+addopts = "--cov=beekeeping"
 
 [tool.setuptools_scm]
 
 [tool.check-manifest]
 ignore = [
-    "*.yaml",
-    "tox.ini",
-    "tests/*",
-    "tests/test_unit/*",
-    "tests/test_integration/*",
-    "docs/",
-    "docs/source/",
+  "*.yaml",
+  "tox.ini",
+  "tests/*",
+  "tests/test_unit/*",
+  "tests/test_integration/*",
+  "docs/",
+  "docs/source/",
 ]
 
 [[tool.mypy.overrides]]
-module = [
-  "dash.*",
-  "dash_bootstrap_components.*",
-  "h5py.*",
-  "matplotlib.*",
-  "plotly.*",
-  "cv2.*",
-  "shapely.*",
-]
+module = ["dash.*", "dash_bootstrap_components.*", "plotly.*"]
 ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 79
+exclude = ["__init__.py", "build", ".eggs"]
+fix = true
+
+[tool.ruff.lint]
+# See https://docs.astral.sh/ruff/rules/
+ignore = [
+  "D203", # one blank line before class
+  "D213", # multi-line-summary second line
+]
+select = [
+  "E",      # pycodestyle errors
+  "F",      # Pyflakes
+  "UP",     # pyupgrade
+  "I",      # isort
+  "B",      # flake8 bugbear
+  "SIM",    # flake8 simplify
+  "C90",    # McCabe complexity
+  "D",      # pydocstyle
+  "NPY201", # checks for syntax that was deprecated in numpy2.0
+]
+per-file-ignores = { "tests/*" = [
+  "D100", # missing docstring in public module
+  "D205", # missing blank line between summary and description
+  "D103", # missing docstring in public function
+] }
+
+[tool.ruff.format]
+docstring-code-format = true # Also format code in docstrings
+
+[tool.codespell]
+skip = '.git,.tox'
+check-hidden = true
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py{311,312,313}
+isolated_build = True
+
+[gh-actions]
+python =
+    3.11: py311
+    3.12: py312
+    3.13: py313
+
+[testenv]
+extras =
+    dev
+commands =
+    pytest -v --color=yes --cov=beekeeping --cov-report=xml
+"""

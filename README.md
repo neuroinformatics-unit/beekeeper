@@ -1,45 +1,92 @@
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-orange.svg)](https://opensource.org/licenses/BSD-3-Clause)
-![CI](https://img.shields.io/github/actions/workflow/status/SainsburyWellcomeCentre/WAZP/test_and_deploy.yml?label=CI)
-[![codecov](https://codecov.io/gh/SainsburyWellcomeCentre/WAZP/branch/main/graph/badge.svg?token=DYQB8EHTJB)](https://codecov.io/gh/SainsburyWellcomeCentre/WAZP)
-[![docs](https://img.shields.io/website?down_color=red&down_message=down&label=docs&up_color=brightgreen&up_message=up&url=https%3A%2F%2Fsainsburywellcomecentre.github.io%2FWAZP%2F)](https://sainsburywellcomecentre.github.io/WAZP/)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v0.json)](https://github.com/charliermarsh/ruff)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/python/black)
+[![CI](https://img.shields.io/github/actions/workflow/status/SainsburyWellcomeCentre/beekeeping/test_and_deploy.yml?label=CI)](https://github.com/neuroinformatics-unit/beekeeping/actions)
+[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/format.json)](https://github.com/astral-sh/ruff)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-# WAZP 🐝
-**W**asp **A**nimal-tracking **Z**oo project with **P**ose estimation
-(name is subject to refinement)
+# `beekeeping` 🐝
+Manage video metadata for animal behaviour experiments.
 
 ## Overview
 
-WAZP is a dashboard built with [Dash-Plotly](https://dash.plotly.com/) for analysing animal tracking data. It can display pose estimation output from [DeepLabCut](https://github.com/DeepLabCut/DeepLabCut).
+`beekeeping` is a web-based dashboard built with [Dash-Plotly](https://dash.plotly.com/) for managing video metadata in animal behaviour experiments. It provides an intuitive interface for creating, editing, and organizing metadata files associated with experimental videos.
 
-The package is currently in early development 🏗️ and is not yet ready for use. Stay tuned ⌛
+**Key Features:**
+- Upload and manage project configurations
+- Interactive metadata table with editing capabilities
+- Bulk import from spreadsheets (CSV/Excel)
+- Automatic detection of videos missing metadata
+- Export metadata as YAML files
+- Responsive web interface with Bootstrap theming
+
+It is based on an earlier codebase called [WAZP](https://sainsburywellcomecentre.github.io/WAZP/), but focuses specifically on metadata management.
 
 ## Installation
 
-We recommend you install WAZP inside a [conda](https://docs.conda.io/en/latest/) environment.
-Once you have `conda` installed, the following will create and activate an environment. You can call your environment whatever you like, we've used `wazp-env`.
+Install `beekeeping` inside a [conda](https://docs.conda.io/en/latest/) environment:
 
 ```sh
-conda create -n wazp-env -c conda-forge python=3 pytables
-conda activate wazp-env
+conda create -n beekeeping-env -c conda-forge python=3.12
+conda activate beekeeping-env
+git clone https://github.com/neuroinformatics-unit/beekeeping.git
+cd beekeeping
+pip install .
 ```
 
-Next install the latest version of WAZP from pip:
+## Getting Started
 
-```sh
-pip install wazp
-```
+1. **Launch the application**
+   ```bash
+   start-beekeeping
+   ```
+   The app opens in your browser at `http://localhost:8050`
 
-## Launching the dashboard
+2. **Upload Project Configuration**
+   - Navigate to the **Home** page
+   - Upload your `project_config.yaml` file containing:
+     ```yaml
+     videos_dir_path: /path/to/your/videos
+     metadata_fields_file_path: /path/to/metadata_fields.yaml
+     metadata_key_field_str: File
+     ```
 
-Once installed, launch the dashboard by running the following command from the root of the repository:
+3. **Manage Video Metadata**
+   - Navigate to the **Metadata** page to view/edit your video metadata table
+   - Each row represents one video file's metadata
 
-```sh
-startwazp
-```
-This will launch a local web server. If the dashboard does not automatically open in your default browser, click the link in the terminal to open it (the link will be of the form `http://localhost:8050/`).
+### Core Operations
+
+#### **Viewing and Editing Metadata**
+- **Browse**: Scroll through the paginated table (25 rows per page)
+- **Sort**: Click column headers to sort data
+- **Hide/Show columns**: Use column visibility controls
+- **Edit**: Click any editable cell to modify values directly
+- **Row selection**: Click checkboxes to select rows for batch operations
+
+#### **Adding Missing Videos**
+- Click **"Check for missing metadata files"**
+- The app scans your videos directory and adds rows for videos without `.metadata.yaml` files
+- File extensions supported: `.avi`, `.mp4`
+
+#### **Manual Data Entry**
+- Click **"Add empty row"** to create a new metadata entry
+- Fill in the fields as needed
+- The filename field links to your video file
+
+#### **Batch Operations**
+- **Select All/Unselect All**: Mass row selection controls
+- **Export Selected**: Click "Export selected rows as yaml" to save `.metadata.yaml` files for selected videos
+- **Import from Spreadsheet**: Upload CSV/Excel files to bulk generate metadata files
+
+#### **Spreadsheet Import Process**
+1. Prepare your spreadsheet (CSV or Excel) with columns matching your metadata fields
+2. Click **"Generate yaml files from spreadsheet"**
+3. Upload your file
+4. The app will:
+   - Match spreadsheet columns to metadata fields
+   - Add missing columns with empty values
+   - Only process rows with corresponding video files
+   - Generate `.metadata.yaml` files in your videos directory
+   - Show confirmation with count of files generated
 
 ## License
 

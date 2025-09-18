@@ -10,12 +10,13 @@ class Helpers:
 
     Added as a pytest fixture.
 
-    Example
+    Example:
     -------
     ```
     def test_my_thing(helpers)
         helpers.debug_screenshot()
     ```
+
     """
 
     @staticmethod
@@ -28,10 +29,11 @@ class Helpers:
 
         Parameters
         ----------
-            dash_duo : DashComposite
-                The current dash_duo fixture.
-            subdir: str, optional
-                A subdirectory name (to help you find the screenshots.)
+        dash_duo : DashComposite
+            The current dash_duo fixture.
+        subdir: str, optional
+            A subdirectory name (to help you find the screenshots.)
+
         """
         screenshots_dirname = Path(".test_helper_screenshots")
         if subdir:
@@ -60,32 +62,17 @@ def home_page_name_and_title():
 
 @pytest.fixture
 def metadata_page_name_and_title():
-    return ("01 metadata", "Metadata")
-
-
-@pytest.fixture
-def roi_page_name_and_title():
-    return ("02 roi", "ROI definition")
-
-
-@pytest.fixture
-def pose_estimation_page_name_and_title():
-    return ("03 pose estimation", "Pose estimation inference")
-
-
-@pytest.fixture
-def dashboard_page_name_and_title():
-    return ("04 dashboard", "Dashboard & data export")
+    return ("Metadata", "Metadata")
 
 
 @pytest.fixture
 def timeout() -> float:
-    """Maximum time to wait for a component
-    to be located in layout
+    """Maximum time to wait for a component to be located in layout.
 
     Returns
     -------
     timeout : float
         maximum time to wait in seconds
+
     """
     return 8

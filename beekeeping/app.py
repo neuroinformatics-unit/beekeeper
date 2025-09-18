@@ -1,13 +1,15 @@
-# -*- coding: utf-8 -*-
+"""Main Dash application module for beekeeping.
+
+This module contains the main Dash application initialization, layout
+definition, and callback registration for the beekeeping web application.
+"""
 
 import dash
 import dash_bootstrap_components as dbc
 from dash import Dash, dcc, html
 
-import wazp.callbacks.dashboard as dashboard
-import wazp.callbacks.home as home
-import wazp.callbacks.metadata as metadata
-import wazp.callbacks.roi as roi
+import beekeeping.callbacks.home as home
+import beekeeping.callbacks.metadata as metadata
 
 #################
 # Initialise app
@@ -16,7 +18,7 @@ app = Dash(
     __name__,
     use_pages=True,
     external_stylesheets=[dbc.themes.BOOTSTRAP],
-    suppress_callback_exceptions=True
+    suppress_callback_exceptions=True,
     # TODO: is there an alternative to prevent error w/ chained callbacks?
 )
 
@@ -37,17 +39,17 @@ SIDEBAR_STYLE = {
 # Sidebar component
 sidebar = html.Div(
     [
-        html.H2("WAZP 🐝", className="display-4"),
+        html.H2("beekeeping 🐝", className="display-4"),
         html.Hr(),
         html.P(
             [
-                "Wasp",
+                "Managing",
                 html.Br(),
-                "Animal-tracking",
+                "video metadata",
                 html.Br(),
-                "Zoo project with",
+                "for animal behaviour",
                 html.Br(),
-                "Pose estimation",
+                "experiments",
             ],
             className="lead",
         ),
@@ -107,16 +109,15 @@ app.layout = html.Div(
 ################
 home.get_callbacks(app)
 metadata.get_callbacks(app)
-roi.get_callbacks(app)
-dashboard.get_callbacks(app)
 
 
-def startwazp():
-    app.run_server(debug=True)
+def startbeekeeping():
+    """Start the beekeeping Dash application server."""
+    app.run(debug=True)
 
 
 ###############
 # Driver
 ################
 if __name__ == "__main__":
-    startwazp()
+    startbeekeeping()

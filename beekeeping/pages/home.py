@@ -1,3 +1,9 @@
+"""Home page layout for the beekeeping application.
+
+This module defines the layout and components for the home page,
+including configuration file upload functionality.
+"""
+
 import dash
 import dash_bootstrap_components as dbc
 from dash import dcc, html
@@ -13,7 +19,9 @@ dash.register_page(__name__, path="/")
 # Upload component for project config
 upload_component = dcc.Upload(
     id="upload-project-config",
-    children=html.Div(["Drag and Drop or ", html.A("Select project config file")]),
+    children=html.Div(
+        ["Drag and Drop or ", html.A("Select project config file")]
+    ),
     contents=None,
     style={
         "width": "100%",
