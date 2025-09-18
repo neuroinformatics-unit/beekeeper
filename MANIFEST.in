@@ -1,8 +1,8 @@
 include LICENSE
 include *.md
 
-recursive-include wazp/*.py
-recursive-include wazp/pages *.py
+recursive-include beekeeper/*.py
+recursive-include beekeeper/pages *.py
 
 recursive-exclude docs *
 recursive-exclude scripts *
