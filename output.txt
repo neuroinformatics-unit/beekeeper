@@ -1,0 +1,4 @@
+contributing.rst:81: [redirected permanently] https://chromedriver.chromium.org/downloads to https://developer.chrome.com/docs/chromedriver/downloads
+index.rst:1: [redirected permanently] https://github.com/neuroinformatics-unit/beekeeper/actions to https://github.com/neuroinformatics-unit/beekeeping/actions
+index.rst:1: [redirected permanently] https://opensource.org/licenses/BSD-3-Clause to https://opensource.org/license/BSD-3-Clause
+contributing.rst:149: [redirected permanently] https://github.com/pypa/setuptools_scm to https://github.com/pypa/setuptools-scm
