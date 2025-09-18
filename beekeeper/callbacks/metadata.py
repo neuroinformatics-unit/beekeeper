@@ -7,8 +7,8 @@ video metadata files.
 
 import base64
 import io
-import pathlib as pl
 import re
+from pathlib import Path
 from typing import Any
 
 import dash
@@ -460,7 +460,7 @@ def get_callbacks(app: dash.Dash) -> None:  # noqa: C901
             # List of videos w/o metadata and not in table
             list_video_files = []
             list_metadata_files = []
-            for f in pl.Path(video_dir).iterdir():
+            for f in Path(video_dir).iterdir():
                 if str(f).endswith(".metadata.yaml"):
                     list_metadata_files.append(
                         re.sub(".metadata$", "", f.stem)
@@ -673,10 +673,10 @@ def get_callbacks(app: dash.Dash) -> None:  # noqa: C901
             decoded = base64.b64decode(content_string)
             try:
                 # as csv
-                if "csv" in pl.Path(spreadsheet_filename).suffix:
+                if "csv" in Path(spreadsheet_filename).suffix:
                     df = pd.read_csv(io.StringIO(decoded.decode("utf-8")))
                 # as xls(x)
-                elif "xls" in pl.Path(spreadsheet_filename).suffix:
+                elif "xls" in Path(spreadsheet_filename).suffix:
                     df = pd.read_excel(io.BytesIO(decoded))
                 else:
                     import_message_state = True
@@ -724,7 +724,7 @@ def get_callbacks(app: dash.Dash) -> None:  # noqa: C901
             ]
 
             list_filepaths_to_check = [
-                pl.Path(video_dir, row[field_to_use_as_filename])
+                Path(video_dir, row[field_to_use_as_filename])
                 for row in list_dict_per_row
             ]
             list_dict_per_row = [
@@ -732,17 +732,16 @@ def get_callbacks(app: dash.Dash) -> None:  # noqa: C901
                 for row, fpath in zip(
                     list_dict_per_row, list_filepaths_to_check, strict=False
                 )
-                if pl.Path(fpath).is_file() or pl.Path(fpath).is_symlink()
+                if Path(fpath).is_file() or Path(fpath).is_symlink()
             ]
 
             # dump as yaml files
             for row in list_dict_per_row:
                 yaml_filename = (
-                    pl.Path(row[field_to_use_as_filename]).stem
-                    + ".metadata.yaml"
+                    Path(row[field_to_use_as_filename]).stem + ".metadata.yaml"
                 )
 
-                with open(pl.Path(video_dir) / yaml_filename, "w") as yamlf:
+                with open(Path(video_dir) / yaml_filename, "w") as yamlf:
                     yaml.dump(row, yamlf, sort_keys=False)
 
             # update message

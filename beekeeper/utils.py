@@ -4,7 +4,7 @@ This module contains helper functions for processing metadata files,
 dataframe operations, and file management.
 """
 
-import pathlib as pl
+from pathlib import Path
 
 import pandas as pd
 import yaml
@@ -35,7 +35,7 @@ def df_from_metadata_yaml_files(
     # List of metadata files in parent directory
     list_metadata_files = [
         str(f)
-        for f in pl.Path(parent_dir).iterdir()
+        for f in Path(parent_dir).iterdir()
         if str(f).endswith(".metadata.yaml")
     ]
 
@@ -126,12 +126,12 @@ def export_selected_rows_as_yaml(
     # Export selected rows
     for row in [data[i] for i in list_selected_rows]:
         # extract key per row
-        key = pl.Path(row[app_storage["metadata_key_field_str"]]).stem
+        key = Path(row[app_storage["metadata_key_field_str"]]).stem
 
         # write each row to yaml
         yaml_filename = key + ".metadata.yaml"
         with open(
-            pl.Path(app_storage["videos_dir_path"]) / yaml_filename, "w"
+            Path(app_storage["videos_dir_path"]) / yaml_filename, "w"
         ) as yamlf:
             yaml.dump(row, yamlf, sort_keys=False)
 
