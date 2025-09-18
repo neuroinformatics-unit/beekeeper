@@ -8,7 +8,7 @@ authors = [
 ]
 description = "Managing video metadata for animal behaviour experiments"
 readme = "README.md"
-requires-python = ">=3.9.0"
+requires-python = ">=3.11.0"
 dynamic = ["version"]
 
 license = { text = "BSD-3-Clause" }
@@ -26,8 +26,9 @@ classifiers = [
   "Development Status :: 2 - Pre-Alpha",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Operating System :: OS Independent",
   "License :: OSI Approved :: BSD License",
 ]
