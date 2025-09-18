@@ -6,7 +6,7 @@ authors = [
   { name = "Sam Cunliffe", email = "s.cunliffe@ucl.ac.uk" },
   { name = "Adam Tyson", email = "code@adamltyson.com" },
 ]
-description = "Managing video metadata for animal behaviour experiments"
+description = "Manage video metadata for animal behaviour experiments"
 readme = "README.md"
 requires-python = ">=3.11.0"
 dynamic = ["version"]
