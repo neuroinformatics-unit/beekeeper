@@ -34,15 +34,15 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/neuroinformatics-unit/beekeeper"
-"Bug tracker" = "https://github.com/neuroinformatics-unit/beekeeper/issues"
-# "Documentation" = "https://beekeeper.neuroinformatics.dev"
-"Source code" = "https://github.com/neuroinformatics-unit/beekeeper"
-"User support" = "https://github.com/neuroinformatics-unit/beekeeper/issues"
+"Homepage" = "https://github.com/neuroinformatics-unit/beekeeping"
+"Bug tracker" = "https://github.com/neuroinformatics-unit/beekeeping/issues"
+# "Documentation" = "https://beekeeping.neuroinformatics.dev"
+"Source code" = "https://github.com/neuroinformatics-unit/beekeeping"
+"User support" = "https://github.com/neuroinformatics-unit/beekeeping/issues"
 
 
 [project.scripts]
-start-beekeeper = "beekeeper.app:startbeekeeper"
+start-beekeeping = "beekeeping.app:startbeekeeping"
 
 [project.optional-dependencies]
 dev = [
@@ -68,11 +68,11 @@ build-backend = "setuptools.build_meta"
 include-package-data = true
 
 [tool.setuptools.packages.find]
-include = ["beekeeper*"]
+include = ["beekeeping*"]
 exclude = ["tests*", "docs*"]
 
 [tool.pytest.ini_options]
-addopts = "--cov=beekeeper"
+addopts = "--cov=beekeeping"
 
 [tool.setuptools_scm]
 
@@ -88,11 +88,7 @@ ignore = [
 ]
 
 [[tool.mypy.overrides]]
-module = [
-  "dash.*",
-  "dash_bootstrap_components.*",
-  "plotly.*",
-]
+module = ["dash.*", "dash_bootstrap_components.*", "plotly.*"]
 ignore_missing_imports = true
 
 [tool.ruff]
@@ -146,5 +142,5 @@ python =
 extras =
     dev
 commands =
-    pytest -v --color=yes --cov=beekeeper --cov-report=xml
+    pytest -v --color=yes --cov=beekeeping --cov-report=xml
 """

@@ -1,4 +1,4 @@
-"""Utility functions for the beekeeper application.
+"""Utility functions for the beekeeping application.
 
 This module contains helper functions for processing metadata files,
 dataframe operations, and file management.

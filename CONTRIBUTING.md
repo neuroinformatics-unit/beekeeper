@@ -1,8 +1,8 @@
-# Contributing to `beekeeper`
+# Contributing to `beekeeping`
 
 ## Introduction
 
-**Contributors to `beekeeper` are absolutely encouraged**, whether to fix a bug, develop a new feature, or improve the documentation.
+**Contributors to `beekeeping` are absolutely encouraged**, whether to fix a bug, develop a new feature, or improve the documentation.
 If you're unsure about any part of the contributing process, please get in touch. It's best to reach out in public, e.g. by opening an issue so that others can benefit from the discussion.
 
 ## Contributing code
@@ -10,14 +10,14 @@ If you're unsure about any part of the contributing process, please get in touch
 ### Creating a development environment
 
 It is recommended to use [conda](https://docs.conda.io/en/latest/) to install a development environment for
-`beekeeper`. Once you have `conda` installed, create and activate a `conda` environment for development with the following commands:
+`beekeeping`. Once you have `conda` installed, create and activate a `conda` environment for development with the following commands:
 
 ```sh
-conda create -n beekeeper-dev -c conda-forge python=3.12
-conda activate beekeeper-dev
+conda create -n beekeeping-dev -c conda-forge python=3.12
+conda activate beekeeping-dev
 ```
 
-To install the development version of `beekeeper`, clone the GitHub repository, and then run from the root of the repository:
+To install the development version of `beekeeping`, clone the GitHub repository, and then run from the root of the repository:
 
 ```sh
 pip install -e '.[dev]'
@@ -28,20 +28,20 @@ This will install the package with all the development dependencies.
 
 ### Development workflow
 We follow the [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow):
-1. Create a [fork](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) of the `beekeeper` repository.
+1. Create a [fork](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) of the `beekeeping` repository.
 
 2. Clone the forked repository to your local machine and change directories
     ```
-    git clone https://github.com/your-username/beekeeper.git
-    cd beekeeper
+    git clone https://github.com/your-username/beekeeping.git
+    cd beekeeping
     ```
 
-3. Set the upstream remote to the base `beekeeper` repository:
+3. Set the upstream remote to the base `beekeeping` repository:
     ```
-    git remote add upstream https://github.com/neuroinformatics-unit/beekeeper.git
+    git remote add upstream https://github.com/neuroinformatics-unit/beekeeping.git
     ```
 
-4. If you haven’t already, create a development environment and install the `beekeeper` package in development mode (see [creating a development environment](#creating-a-development-environment)).
+4. If you haven't already, create a development environment and install the `beekeeping` package in development mode (see [creating a development environment](#creating-a-development-environment)).
 
 5. We use [pre-commit hooks](https://pre-commit.com/) to ensure a consistent formatting style. They are defined in the `.pre-commit-config.yaml` file. Install the pre-commit hooks by running:
     ```
@@ -146,7 +146,7 @@ We use [semantic versioning](https://semver.org/), which includes `MAJOR`.`MINOR
 * MINOR = new feature
 * MAJOR = breaking change
 
-We use [`setuptools_scm`](https://github.com/pypa/setuptools_scm) to automatically version `beekeeper`. It has been pre-configured in the `pyproject.toml` file. `setuptools_scm` will automatically infer the version using git. To manually set a new semantic version, create a tag and make sure the tag is pushed to GitHub. Make sure you commit any changes you wish to be included in this version. E.g. to bump the version to `1.0.0`:
+We use [`setuptools_scm`](https://github.com/pypa/setuptools_scm) to automatically version `beekeeping`. It has been pre-configured in the `pyproject.toml` file. `setuptools_scm` will automatically infer the version using git. To manually set a new semantic version, create a tag and make sure the tag is pushed to GitHub. Make sure you commit any changes you wish to be included in this version. E.g. to bump the version to `1.0.0`:
 
 ```sh
 git add .
@@ -159,7 +159,7 @@ Pushing a tag to GitHub triggers the package's deployment to PyPI. The version n
 
 ## Contributing documentation
 
-The documentation is hosted via [GitHub pages](https://pages.github.com/) at [beekeeper.neuroinformatics.dev](https://beekeeper.neuroinformatics.dev/). Its source files are located in the `docs` folder of this repository.
+The documentation is hosted via [GitHub pages](https://pages.github.com/) at [beekeeping.neuroinformatics.dev](https://beekeeping.neuroinformatics.dev/). Its source files are located in the `docs` folder of this repository.
 
 Source files are written in either [reStructuredText](https://docutils.sourceforge.io/rst.html) or [markdown](https://myst-parser.readthedocs.io/en/stable/syntax/typography.html).
 The `index.rst` file corresponds to the main page of the documentation website. Other `.rst`  or `.md` files are included in the main page via the `toctree` directive.
@@ -206,7 +206,7 @@ sphinx-build docs/source docs/build
 
 ### Architecture
 ```
-beekeeper/
+beekeeping/
 ├── app.py              # Main Dash app initialization
 ├── pages/              # Page components
 │   ├── home.py         # Upload interface

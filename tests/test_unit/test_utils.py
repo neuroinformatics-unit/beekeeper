@@ -5,10 +5,10 @@ import pandas as pd
 import pytest
 import yaml
 
-from beekeeper.callbacks.metadata import (
+from beekeeping.callbacks.metadata import (
     create_metadata_table_component_from_df,
 )
-from beekeeper.utils import df_from_metadata_yaml_files
+from beekeeping.utils import df_from_metadata_yaml_files
 
 
 @pytest.fixture

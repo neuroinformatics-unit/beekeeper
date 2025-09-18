@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Structure
 
-This repository contains **`beekeeper`**, a Python-based Dash web application for managing video metadata in animal behaviour experiments. The project is organized as follows:
+This repository contains **`beekeeping`**, a Python-based Dash web application for managing video metadata in animal behaviour experiments. The project is organized as follows:
 
-- `beekeeper/` - Main Python package containing the core application
+- `beekeeping/` - Main Python package containing the core application
   - `app.py` - Main Dash application entry point with layout and server startup
   - `pages/` - Dash page components (home.py, metadata.py)
   - `callbacks/` - Dash callback functions (home.py, metadata.py)
@@ -19,8 +19,8 @@ This repository contains **`beekeeper`**, a Python-based Dash web application fo
 ### Environment Setup
 ```bash
 # Create conda environment (recommended)
-conda create -n beekeeper-dev -c conda-forge python=3.12
-conda activate beekeeper-dev
+conda create -n beekeeping-dev -c conda-forge python=3.12
+conda activate beekeeping-dev
 
 # Install for development
 pip install -e '.[dev]'
@@ -34,20 +34,20 @@ Please double check that pre-commit hooks are running locally and passing before
 ### Core Commands
 ```bash
 # Start the application
-start-beekeeper
+start-beekeeping
 
 # Run tests (requires chromedriver for integration tests)
 pytest
 
 # Run tests with coverage
-pytest -v --color=yes --cov=beekeeper --cov-report=xml
+pytest -v --color=yes --cov=beekeeping --cov-report=xml
 
 # Code formatting and linting
 pre-commit run      # staged files only
 pre-commit run -a   # all files
 
 # Type checking
-mypy -p beekeeper
+mypy -p beekeeping
 
 # Build documentation locally
 pip install -r docs/requirements.txt

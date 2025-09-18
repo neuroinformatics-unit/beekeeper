@@ -1,4 +1,4 @@
-"""Callback functions for the metadata page of the beekeeper application.
+"""Callback functions for the metadata page of the beekeeping application.
 
 This module contains callback functions that handle metadata table operations,
 including adding/editing metadata, importing/exporting data, and managing
@@ -17,7 +17,7 @@ import pandas as pd
 import yaml
 from dash import Input, Output, State, dash_table, dcc, html
 
-from beekeeper import utils
+from beekeeping import utils
 
 # TODO: other video extensions? have this in project config file instead?
 VIDEO_TYPES = [".avi", ".mp4"]

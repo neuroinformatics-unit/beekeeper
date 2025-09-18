@@ -1,15 +1,15 @@
-"""Main Dash application module for beekeeper.
+"""Main Dash application module for beekeeping.
 
 This module contains the main Dash application initialization, layout
-definition, and callback registration for the beekeeper web application.
+definition, and callback registration for the beekeeping web application.
 """
 
 import dash
 import dash_bootstrap_components as dbc
 from dash import Dash, dcc, html
 
-import beekeeper.callbacks.home as home
-import beekeeper.callbacks.metadata as metadata
+import beekeeping.callbacks.home as home
+import beekeeping.callbacks.metadata as metadata
 
 #################
 # Initialise app
@@ -39,7 +39,7 @@ SIDEBAR_STYLE = {
 # Sidebar component
 sidebar = html.Div(
     [
-        html.H2("beekeeper 🐝", className="display-4"),
+        html.H2("beekeeping 🐝", className="display-4"),
         html.Hr(),
         html.P(
             [
@@ -111,8 +111,8 @@ home.get_callbacks(app)
 metadata.get_callbacks(app)
 
 
-def startbeekeeper():
-    """Start the beekeeper Dash application server."""
+def startbeekeeping():
+    """Start the beekeeping Dash application server."""
     app.run(debug=True)
 
 
@@ -120,4 +120,4 @@ def startbeekeeper():
 # Driver
 ################
 if __name__ == "__main__":
-    startbeekeeper()
+    startbeekeeping()

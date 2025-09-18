@@ -1,4 +1,4 @@
-"""Callback functions for the home page of the beekeeper application.
+"""Callback functions for the home page of the beekeeping application.
 
 This module contains the callback functions that handle user interactions
 on the home page, including configuration file uploads and session storage.

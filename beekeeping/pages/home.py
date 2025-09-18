@@ -1,4 +1,4 @@
-"""Home page layout for the beekeeper application.
+"""Home page layout for the beekeeping application.
 
 This module defines the layout and components for the home page,
 including configuration file upload functionality.
