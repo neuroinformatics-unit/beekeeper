@@ -5,10 +5,10 @@ import pandas as pd
 import pytest
 import yaml
 
-from beekeeper.callbacks.metadata import (
+from beekeeping.callbacks.metadata import (
     create_metadata_table_component_from_df,
 )
-from beekeeper.utils import df_from_metadata_yaml_files
+from beekeeping.utils import df_from_metadata_yaml_files
 
 
 @pytest.fixture
@@ -102,8 +102,8 @@ def test_create_metadata_table_component_column_ordering(
 
     # Verify our setup: key field should not be first in the original DataFrame
     assert df.columns[0] != key_field, (
-        f"Test setup error: '{key_field}' should not "
-        "be first in original DataFrame"
+        f"Test setup error: '{key_field}' "
+        "should not be first in original DataFrame"
     )
 
     # Create config with the specified key field

@@ -1,4 +1,4 @@
-name: Tests
+name: Run tests and deploy to PyPI
 
 on:
   push:
@@ -7,7 +7,6 @@ on:
     tags:
       - '*'
   pull_request:
-  merge_group:
 
 jobs:
   linting:
@@ -15,30 +14,28 @@ jobs:
     steps:
       - uses: neuroinformatics-unit/actions/lint@v2
 
+  manifest:
+    name: Check Manifest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: neuroinformatics-unit/actions/check_manifest@v2
+
   test:
-    needs: [linting]
+    needs: [linting, manifest]
     name: ${{ matrix.os }} py${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # Run all supported Python versions on linux
-        python-version: ["3.11", "3.12"]
+        # Run all supported Python versions on linux (plus one development unsupported)
+        python-version: ["3.11", "3.12", "3.13"]
         os: [ubuntu-latest]
-        # Include 1 MacOS Silicon (latest) and 1 Windows run
+        # Include one windows and macos run
         include:
         - os: macos-latest
           python-version: "3.12"
         - os: windows-latest
           python-version: "3.12"
     steps:
-      - name: Cache Test Data
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.beekeeper/*
-          key: cached-test-data-${{ runner.os }}
-          restore-keys: cached-test-data
-
       # A hack because chrome isn't in the PATH on Windows
       - name: Fix Chrome application path on Windows
         if: matrix.os == 'windows-latest'
@@ -57,7 +54,6 @@ jobs:
       - uses: neuroinformatics-unit/actions/test@v2
         with:
           python-version: ${{ matrix.python-version }}
-          secret-codecov-token: ${{ secrets.CODECOV_TOKEN }}
 
   build_sdist_wheels:
     name: Build source distribution
@@ -71,10 +67,9 @@ jobs:
   upload_all:
     name: Publish build distributions
     needs: [build_sdist_wheels]
-    if: github.event_name == 'push' && github.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/download-artifact@v5
+    - uses: actions/download-artifact@v4
       with:
         name: artifact
         path: dist

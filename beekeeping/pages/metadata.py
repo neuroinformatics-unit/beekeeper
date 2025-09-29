@@ -1,4 +1,4 @@
-"""Metadata page layout for the beekeeper application.
+"""Metadata page layout for the beekeeping application.
 
 This module defines the layout for the metadata page where users
 can view and manage video metadata.

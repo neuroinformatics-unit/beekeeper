@@ -1,8 +1,8 @@
-# Contributing to `beekeeper`
+# Contributing to `beekeeping`
 
 ## Introduction
 
-**Contributors to `beekeeper` are absolutely encouraged**, whether to fix a bug, develop a new feature, or improve the documentation.
+**Contributors to `beekeeping` are absolutely encouraged**, whether to fix a bug, develop a new feature, or improve the documentation.
 If you're unsure about any part of the contributing process, please get in touch. It's best to reach out in public, e.g. by opening an issue so that others can benefit from the discussion.
 
 ## Contributing code
@@ -10,57 +10,65 @@ If you're unsure about any part of the contributing process, please get in touch
 ### Creating a development environment
 
 It is recommended to use [conda](https://docs.conda.io/en/latest/) to install a development environment for
-`beekeeper`. Once you have `conda` installed, the following commands
-will create and activate a `conda` environment with the requirements needed
-for a development environment:
+`beekeeping`. Once you have `conda` installed, create and activate a `conda` environment for development with the following commands:
 
 ```sh
-conda create -n beekeeper-dev -c conda-forge python=3.12
-conda activate beekeeper-dev
+conda create -n beekeeping-dev -c conda-forge python=3.12
+conda activate beekeeping-dev
 ```
 
-To install `beekeeper` for development, clone the GitHub repository, and then run from inside the repository:
+To install the development version of `beekeeping`, clone the GitHub repository, and then run from the root of the repository:
 
 ```sh
 pip install -e '.[dev]'
 ```
 
-This will install the package, its dependencies,
-and its development dependencies.
+This will install the package with all the development dependencies.
+
+
+### Development workflow
+We follow the [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow):
+1. Create a [fork](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) of the `beekeeping` repository.
+
+2. Clone the forked repository to your local machine and change directories
+    ```
+    git clone https://github.com/your-username/beekeeping.git
+    cd beekeeping
+    ```
+
+3. Set the upstream remote to the base `beekeeping` repository:
+    ```
+    git remote add upstream https://github.com/neuroinformatics-unit/beekeeping.git
+    ```
+
+4. If you haven't already, create a development environment and install the `beekeeping` package in development mode (see [creating a development environment](#creating-a-development-environment)).
+
+5. We use [pre-commit hooks](https://pre-commit.com/) to ensure a consistent formatting style. They are defined in the `.pre-commit-config.yaml` file. Install the pre-commit hooks by running:
+    ```
+    pre-commit install
+    ```
+    Upon committing, the hooks will run and try to automatically format the code according to the predefined rules. If a problem cannot be auto-fixed, the corresponding tool will provide
+    information on what the issue is and how to fix it. Please ensure all hooks pass before committing.
+
+6. Now create a new branch in your fork, edit the code or documentation, and commit your changes.
+
+7. Submit your changes via a pull request, following the [pull requests](#pull-requests) guidelines.
+
+These guidelines are based on the [napari guide](https://napari.org/dev/developers/contributing/dev_install.html#dev-installation).
+
+
+
+## Development guidelines
 
 ### Pull requests
 
-In all cases, please submit code to the main repository via a pull request. We recommend, and adhere, to the following conventions:
+In all cases, please submit code to the main repository via a pull request. We adhere to the following conventions:
 
 - Please submit _draft_ pull requests as early as possible to allow for discussion.
 - One approval of a PR (by a repo owner) is enough for it to be merged.
 - Unless someone approves the PR with optional comments, the PR is immediately merged by the approving reviewer.
 - Ask for a review from someone specific if you think they would be a particularly suited reviewer
 
-## Development guidelines
-
-### Formatting and pre-commit hooks
-
-Running `pre-commit install` will set up [pre-commit hooks](https://pre-commit.com/) to ensure a consistent formatting style. Currently, these include:
-* [ruff](https://github.com/astral-sh/ruff) does a number of jobs, including code linting and auto-formatting.
-* [mypy](https://mypy.readthedocs.io/en/stable/index.html) as a static type checker.
-* [codespell](https://github.com/codespell-project/codespell) to check for common misspellings.
-
-These will prevent code from being committed if any of these hooks fail.
-To run all the hooks before committing:
-
-```sh
-pre-commit run  # for staged files
-pre-commit run -a  # for all files in the repository
-```
-
-Some problems will be automatically fixed by the hooks. In this case, you should
-stage the auto-fixed changes and run the hooks again:
-
-```sh
-git add .
-pre-commit run
-```
 
 ### Testing
 
@@ -123,9 +131,6 @@ For Windows, be sure to download the ``chromedriver_win32.zip`` file, extract th
 
 It's a good idea to test locally before pushing. Pytest will run all tests and also report test coverage.
 
-#### Test data
-Test data is automatically generated using pytest fixtures with temporary directories. The unit tests create sample YAML metadata files and project configurations as needed. No external data repositories are required.
-
 ### Continuous integration
 All pushes and pull requests will be built by [GitHub actions](https://docs.github.com/en/actions). This will usually include linting, testing and deployment.
 
@@ -141,7 +146,7 @@ We use [semantic versioning](https://semver.org/), which includes `MAJOR`.`MINOR
 * MINOR = new feature
 * MAJOR = breaking change
 
-We use [`setuptools_scm`](https://github.com/pypa/setuptools_scm) to automatically version `beekeeper`. It has been pre-configured in the `pyproject.toml` file. `setuptools_scm` will automatically infer the version using git. To manually set a new semantic version, create a tag and make sure the tag is pushed to GitHub. Make sure you commit any changes you wish to be included in this version. E.g. to bump the version to `1.0.0`:
+We use [`setuptools_scm`](https://github.com/pypa/setuptools_scm) to automatically version `beekeeping`. It has been pre-configured in the `pyproject.toml` file. `setuptools_scm` will automatically infer the version using git. To manually set a new semantic version, create a tag and make sure the tag is pushed to GitHub. Make sure you commit any changes you wish to be included in this version. E.g. to bump the version to `1.0.0`:
 
 ```sh
 git add .
@@ -154,18 +159,16 @@ Pushing a tag to GitHub triggers the package's deployment to PyPI. The version n
 
 ## Contributing documentation
 
-The documentation is hosted via [GitHub pages](https://pages.github.com/) at [beekeeper.neuroinformatics.dev](https://beekeeper.neuroinformatics.dev/). Its source files are located in the `docs` folder of this repository.
+The documentation is hosted via [GitHub pages](https://pages.github.com/) at [beekeeping.neuroinformatics.dev](https://beekeeping.neuroinformatics.dev/). Its source files are located in the `docs` folder of this repository.
 
-They are written in either [reStructuredText](https://docutils.sourceforge.io/rst.html) or [markdown](https://myst-parser.readthedocs.io/en/stable/syntax/typography.html).
+Source files are written in either [reStructuredText](https://docutils.sourceforge.io/rst.html) or [markdown](https://myst-parser.readthedocs.io/en/stable/syntax/typography.html).
 The `index.rst` file corresponds to the main page of the documentation website. Other `.rst`  or `.md` files are included in the main page via the `toctree` directive.
 
 We use [Sphinx](https://www.sphinx-doc.org/en/master/) and the [PyData Sphinx Theme](https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html) to build the source files into html output. This is handled by a GitHub actions workflow (`.github/workflows/publish_docs.yml`) which is triggered whenever changes are pushed to the `main` branch. The workflow builds the html output files and sends them to a `gh-pages` branch.
 
 ### Editing the documentation
 
-To edit the documentation, first clone the repository, and install `beekeeper` in a development environment (see [instructions above](#creating-a-development-environment)).
-
-Now open a new branch, edit the documentation source files (`.md` or `.rst` in the `docs` folder), and commit your changes. Submit your documentation changes via a pull request, following the same guidelines as for code changes (see [pull requests](#pull-requests)).
+To edit the documentation (`.md` or `.rst` in the `docs` folder), first follow the usual [development workflow](#development-workflow) steps.
 
 If you create a new documentation source file (e.g. `my_new_file.md` or `my_new_file.rst`), you will need to add it to the `toctree` directive in `index.rst` for it to be included in the documentation website:
 
@@ -197,13 +200,13 @@ rm -rf docs/build
 sphinx-build docs/source docs/build
 ```
 
-## Developer Workflow
+## Overview of the codebase
 
 *Generated by Claude*
 
-### Architecture Overview
+### Architecture
 ```
-beekeeper/
+beekeeping/
 ├── app.py              # Main Dash app initialization
 ├── pages/              # Page components
 │   ├── home.py         # Upload interface
@@ -214,9 +217,9 @@ beekeeper/
 └── utils.py            # Data processing utilities
 ```
 
-### Key Components
+### Key components
 
-#### **1. Application Bootstrap (`app.py`)**
+#### **1. Application bootstrap (`app.py`)**
 ```python
 # Multi-page Dash app with Bootstrap theming
 app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -229,9 +232,9 @@ home.get_callbacks(app)
 metadata.get_callbacks(app)
 ```
 
-#### **2. Session Storage Pattern**
-- **Storage Component**: `dcc.Store(id="session-storage")` maintains state across pages
-- **Data Structure**:
+#### **2. Session storage pattern**
+- **Storage component**: `dcc.Store(id="session-storage")` maintains state across pages
+- **Data structure**:
   ```python
   {
       "config": {...},           # Project configuration
@@ -239,38 +242,34 @@ metadata.get_callbacks(app)
   }
   ```
 
-#### **3. Callback Architecture**
-**Home Page Callbacks:**
+#### **3. Callback architecture**
+**Home page callbacks:**
 - `save_input_config_to_storage()`: Processes uploaded YAML, loads metadata fields, stores in session
 
-**Metadata Page Callbacks:**
+**Metadata page callbacks:**
 - `create_metadata_table_and_buttons()`: Builds table from YAML files or shows error
 - `add_rows()`: Handles manual and automatic row addition
 - `modify_rows_selection()`: Manages selection, editing, and export
 - `generate_yaml_files_from_spreadsheet()`: Processes uploaded spreadsheets
 
-### Data Flow
+### Data flow
 
-#### **Configuration Loading**
+#### **Configuration loading**
 1. User uploads project_config.yaml
 2. Callback parses YAML and reads metadata_fields.yaml
 3. Data stored in session storage
 4. Other callbacks access via app_storage parameter
 
 
-#### **Metadata Table Generation**
+#### **Metadata table generation**
 1. utils.df_from_metadata_yaml_files() scans directory
 2. Reads all *.metadata.yaml files
 3. Creates pandas DataFrame
 4. create_metadata_table_component_from_df() builds Dash table
 
 
-#### **YAML Export Process**
+#### **YAML export process**
 1. User selects rows and clicks export
 2. modify_rows_selection() callback triggers
 3. utils.export_selected_rows_as_yaml() processes selection
 4. Writes individual .metadata.yaml files to videos directory
-
-
-## Template
-This package layout and configuration (including pre-commit hooks and GitHub actions) have been copied from the [python-cookiecutter](https://github.com/SainsburyWellcomeCentre/python-cookiecutter) template.

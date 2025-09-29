@@ -20,7 +20,7 @@ autodoc_mock_imports = []
 # use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath("../.."))
 
-project = "beekeeper"
+project = "beekeeping"
 copyright = "2022, University College London (UCL)"
 author = "The Sainsbury Wellcome Centre and The Centre for Advanced Research Computing, UCL"
 try:
@@ -91,7 +91,7 @@ linkcheck_anchors_ignore_for_url = [
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 html_theme = "pydata_sphinx_theme"
-html_title = "beekeeper"
+html_title = "beekeeping"
 
 # Customize the theme
 html_theme_options = {
@@ -100,7 +100,7 @@ html_theme_options = {
             # Label for this link
             "name": "GitHub",
             # URL where the link will redirect
-            "url": "https://github.com/sfmig/beekeeper",  # required
+            "url": "https://github.com/neuroinformatics-unit/beekeeping",  # required
             # Icon class (if "type": "fontawesome"),
             # or path to local image (if "type": "local")
             "icon": "fa-brands fa-github",
@@ -127,5 +127,5 @@ html_baseurl = f"https://{github_user}.github.io/{project}"
 
 # A list of regular expressions that match URLs that should not be checked
 linkcheck_ignore = [
-    "https://beekeeper.neuroinformatics.dev/",  # REMOVE WHEN DEPLOYED
+    "https://beekeeping.neuroinformatics.dev/",  # REMOVE WHEN DEPLOYED
 ]
