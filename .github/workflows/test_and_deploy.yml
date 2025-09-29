@@ -50,7 +50,7 @@ jobs:
           (Get-Item "C:\Program Files\Google\Chrome\Application\chrome.exe").VersionInfo
           chromedriver --version
 
-      # Run tests
+      # Run tests and run code coverage
       - uses: neuroinformatics-unit/actions/test@v2
         with:
           python-version: ${{ matrix.python-version }}
